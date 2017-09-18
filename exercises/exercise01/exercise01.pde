@@ -13,6 +13,12 @@ int circleY;
 int circleVX;
 int circleVY;
 
+//MY VARIABLES
+int randomR ;
+int randomG ; 
+int randomB ; 
+int changingSize;
+
 void setup() {
   size(640, 480);  
   //setting the starting position of the circle in the middle of the canvas
@@ -27,13 +33,20 @@ void setup() {
   background(BACKGROUND_COLOR);
 }
 
-void draw() {//checks whether the distance between the mouse and the circle is less than the size of the circle, in order to determine whether the mouse is on top of it or not
-    if (dist(mouseX, mouseY, circleX, circleY) < CIRCLE_SIZE/2) { 
+void draw() {
+  //generate random colours
+ randomR = int(random(255)); 
+ randomG = int(random(255));
+ randomB = int(random(255));
+ 
+    if (dist(mouseX, mouseY, circleX, circleY) < CIRCLE_SIZE/2) { //checks whether the distance between the mouse and the circle is less than the size of the circle, in order to determine whether the mouse is on top of it or not
     fill(CLICK_FILL_COLOR); //if it is then the colour of the circle changes to the value stored in the CLICK_FILL_COLOR variable
   }
   else {
     fill(NO_CLICK_FILL_COLOR);//otherwise the colour stays the same
   }
+  
+  fill(randomR,randomG,randomB);
   ellipse(circleX, circleY, CIRCLE_SIZE, CIRCLE_SIZE); // the ellipse is drawn using the cooridinates and sizes stated in the variables
   //With every draw loop the speed is added to the position of the circle (both in X and Y), making it move diagonally
   circleX += circleVX;
@@ -47,5 +60,6 @@ void draw() {//checks whether the distance between the mouse and the circle is l
 }
 
 void mousePressed() {
-  background(BACKGROUND_COLOR); //if the mouse is pressed the trail of the circle gets erased by the background color 
+  background(BACKGROUND_COLOR);//if the mouse is pressed the trail of the circle gets erased by the background color 
+  
 }
