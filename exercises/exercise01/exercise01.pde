@@ -1,7 +1,7 @@
 //Declaring the variables 
 final int CIRCLE_SPEED = 7; //speed at which the circle will be travelling
 //variables for the different colors that will be used
-final color NO_CLICK_FILL_COLOR = color(250, 100, 100);
+final color NO_CLICK_FILL_COLOR = color(118, 217, 255);
 final color CLICK_FILL_COLOR = color(100, 100, 250);
 final color BACKGROUND_COLOR = color(250, 150, 150);
 final color STROKE_COLOR = color(250, 150, 150);
@@ -31,6 +31,7 @@ void setup() {
   stroke(STROKE_COLOR);
   fill(NO_CLICK_FILL_COLOR);
   background(BACKGROUND_COLOR);
+  rectMode(CENTER);
 }
 
 void draw() {
@@ -39,21 +40,25 @@ void draw() {
  randomG = int(random(255));
  randomB = int(random(255));
  
+ 
+ 
     if (dist(mouseX, mouseY, circleX, circleY) < CIRCLE_SIZE/2) { //checks whether the distance between the mouse and the circle is less than the size of the circle, in order to determine whether the mouse is on top of it or not
     fill(CLICK_FILL_COLOR); //if it is then the colour of the circle changes to the value stored in the CLICK_FILL_COLOR variable
   }
   else {
-    fill(NO_CLICK_FILL_COLOR);//otherwise the colour stays the same
+    fill(randomR,randomG,randomB);//otherwise the colour stays random
   }
   
   if (mouseX > width/2){ //depending on which side of the screen the mouse is the circle gets smaller or bigger
     changingSize += 1;  //gets bigger
+    rect(circleX, circleY, changingSize, changingSize); // the rectangle is drawn using the cooridinates and sizes stated in the variables
   }else{
     changingSize -= 1;  //gets smaller
+    ellipse(circleX, circleY, changingSize, changingSize); // the ellipse is drawn using the cooridinates and sizes stated in the variables
   }
   
-  fill(randomR,randomG,randomB);
-  ellipse(circleX, circleY, changingSize, changingSize); // the ellipse is drawn using the cooridinates and sizes stated in the variables
+  
+  //ellipse(circleX, circleY, changingSize, changingSize); 
   //With every draw loop the speed is added to the position of the circle (both in X and Y), making it move diagonally
   circleX += circleVX;
   circleY += circleVY;
