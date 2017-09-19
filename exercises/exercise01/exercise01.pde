@@ -14,10 +14,10 @@ int circleVX;
 int circleVY;
 
 //MY VARIABLES
-int randomR ;
-int randomG ; 
-int randomB ; 
-int changingSize;
+int randomR ; //random for red
+int randomG ; //random for green
+int randomB ; //random for blue
+int changingSize = 50; //size of the circle which changes 
 
 void setup() {
   size(640, 480);  
@@ -46,15 +46,21 @@ void draw() {
     fill(NO_CLICK_FILL_COLOR);//otherwise the colour stays the same
   }
   
+  if (mouseX > width/2){ //depending on which side of the screen the mouse is the circle gets smaller or bigger
+    changingSize += 1;  //gets bigger
+  }else{
+    changingSize -= 1;  //gets smaller
+  }
+  
   fill(randomR,randomG,randomB);
-  ellipse(circleX, circleY, CIRCLE_SIZE, CIRCLE_SIZE); // the ellipse is drawn using the cooridinates and sizes stated in the variables
+  ellipse(circleX, circleY, changingSize, changingSize); // the ellipse is drawn using the cooridinates and sizes stated in the variables
   //With every draw loop the speed is added to the position of the circle (both in X and Y), making it move diagonally
   circleX += circleVX;
   circleY += circleVY;
-  if (circleX + CIRCLE_SIZE/2 > width || circleX - CIRCLE_SIZE/2 < 0) { //checks if the ellipse touches either of the edges in x
+  if (circleX + changingSize/2 > width || circleX - changingSize/2 < 0) { //checks if the ellipse touches either of the edges in x
     circleVX = -circleVX;//reverses the direction of the circle in x if it does, making the circle bounce back
   }
-  if (circleY + CIRCLE_SIZE/2 > height || circleY - CIRCLE_SIZE/2 < 0) { //checks if the ellipse touches either of the edges in y
+  if (circleY + changingSize/2 > height || circleY - changingSize/2 < 0) { //checks if the ellipse touches either of the edges in y
     circleVY = -circleVY;//reverses the direction of the circle in y if it does, making the circle bounce back
   }
 }
