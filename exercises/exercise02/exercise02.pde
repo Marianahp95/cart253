@@ -26,12 +26,23 @@ int ballSpeed = 5;
 int ballSize = 16;
 color ballColor = color(255);
 
+//variables for the extra ball -------------------------------------CHANGED
+int ball2_X;
+int ball2_Y;
+int ball2_VX;
+int ball2_VY;
+int ball2_Speed = 5;
+int ball2_Size = 16;
+color ball2_Color = color(255,50,50);
+boolean reverse = false;
+
 void setup() {
   size(640, 480); 
   
   //calling the functions
   setupPaddle(); 
   setupBall();
+  setupCircle();
 }
 
 void setupPaddle() { //assigns value to the variables of the paddle 
@@ -46,6 +57,15 @@ void setupBall() {
   ballY = height/2;
   ballVX = ballSpeed;
   ballVY = ballSpeed;
+  
+}
+
+void setupCircle() { //-------------------------------------CHANGED
+    //sets up the second ball
+  ball2_X = width/2;
+  ball2_Y = height/2;
+  ball2_VX = -ball2_Speed;
+  ball2_VY = ball2_Speed; 
 }
 
 void draw() {
@@ -58,6 +78,8 @@ void draw() {
 
   drawPaddle();
   drawBall();
+  drawCircle();//-------------------------------------CHANGED
+  updateCircle();
 }
 
 void drawStatic() {
@@ -90,6 +112,21 @@ void updateBall() {
   handleBallOffBottom();
 }
 
+void updateCircle() { //movement of the red ball //-------------------------------------CHANGED
+  
+  ball2_X += ball2_VX; //ball movement in x
+  ball2_Y += ball2_VY; //ball movement in y
+  
+ if(reverse){ //color changes depending on wether the controls are reversed or not
+   ball2_Color = color (0,0,250); 
+ } else {
+   ball2_Color = color (250,0,0);
+ }
+  handleCircleHitPaddle();
+  handleBallHitWall();
+  
+}
+
 void drawPaddle() {
   //draws the shape of the paddle
   rectMode(CENTER);
@@ -106,11 +143,25 @@ void drawBall() {
   rect(ballX, ballY, ballSize, ballSize);
 }
 
+void drawCircle () { //draws second ball //-------------------------------------CHANGED
+  fill(ball2_Color);
+  ellipse(ball2_X, ball2_Y, ball2_Size, ball2_Size);
+}
+
+
+
 void handleBallHitPaddle() {
   if (ballOverlapsPaddle()) { //if the ball makes contact with the paddle then the speed is reversed and it bounces
     ballY = paddleY - paddleHeight/2 - ballSize/2; //avoids the intersection of the ball and the paddle
     ballVY = -ballVY; //reverses speed
-    ballSize = ballSize + 20; //ball increases size every time it hits the paddle
+    ballSize = ballSize + 20; //ball increases size every time it hits the paddle //-------------------------------------CHANGED
+  }
+}
+
+//-------------------------------------CHANGED
+void handleCircleHitPaddle() { //if the red ball hits the paddle, the key controls reverse and if it hits a second time they go back to normal
+  if (ball2_X - ball2_Size/2 > paddleX - paddleWidth/2 && ball2_X + ball2_Size/2 < paddleX + paddleWidth/2 && ball2_Y > paddleY - paddleHeight/2 ) { 
+    reverse = !reverse;  
   }
 }
 
@@ -150,20 +201,55 @@ void handleBallHitWall() { //makes the ball bounce off the walls
     ballVY = -ballVY;
     ballSize = ballSize - 10; //ball decreases size when it hits the wall
   }
+
+
+//NEW BALL BOUNCE //-------------------------------------CHANGED
+ if (ball2_X - ballSize/2 < 0) { //bounce off the left side
+    ball2_X = 0 + ball2_Size/2;
+    ball2_VX = -ball2_VX;
+    
+  } else if (ball2_X + ball2_Size/2 > width) { //bounce off the right side
+    ball2_X = width - ball2_Size/2;
+    ball2_VX = -ball2_VX;
+     
+  }
+  
+  if (ball2_Y - ball2_Size/2 < 0) { //bounce off the top 
+    ball2_Y = 0 + ball2_Size/2;
+    ball2_VY = -ball2_VY;
+    
+  } else if (ball2_Y - ball2_Size/2 > height) {
+    ball2_Y = height - ball2_Size/2;
+    ball2_VY = -ball2_VY;
+  }
 }
+
 
 void keyPressed() { //the paddle is moved by the arrows on the keyboard
   if (keyCode == LEFT) {
     paddleVX = -paddleSpeed;
+    if (reverse){ //direction of the paddle is reversed //-------------------------------------CHANGED
+       paddleVX = paddleSpeed;
+    }
   } else if (keyCode == RIGHT) {
     paddleVX = paddleSpeed;
+    if (reverse){ //direction of the paddle is reversed //-------------------------------------CHANGED
+       paddleVX = -paddleSpeed;
+    }
   }
+  
 }
 
-void keyReleased() { //the paddle stops moving if the arrows are released
+void keyReleased() { //the paddle stops moving if the arrows are released //-------------------------------------CHANGED
   if (keyCode == LEFT && paddleVX < 0) {
     paddleVX = 0;
   } else if (keyCode == RIGHT && paddleVX > 0) {
+    paddleVX = 0;
+  }
+  
+  if (keyCode == LEFT && paddleVX > 0 && reverse) {
+    paddleVX = 0;
+  } else if (keyCode == RIGHT && paddleVX < 0 && reverse) {
     paddleVX = 0;
   }
 }
