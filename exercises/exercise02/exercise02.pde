@@ -110,6 +110,7 @@ void handleBallHitPaddle() {
   if (ballOverlapsPaddle()) { //if the ball makes contact with the paddle then the speed is reversed and it bounces
     ballY = paddleY - paddleHeight/2 - ballSize/2; //avoids the intersection of the ball and the paddle
     ballVY = -ballVY; //reverses speed
+    ballSize = ballSize + 20; //ball increases size every time it hits the paddle
   }
 }
 
@@ -137,14 +138,17 @@ void handleBallHitWall() { //makes the ball bounce off the walls
   if (ballX - ballSize/2 < 0) { //bounce off the left side
     ballX = 0 + ballSize/2;
     ballVX = -ballVX;
+    ballSize = ballSize - 10; //ball decreases size when it hits the wall
   } else if (ballX + ballSize/2 > width) { //bounce off the right side
     ballX = width - ballSize/2;
     ballVX = -ballVX;
+     ballSize = ballSize - 10; //ball decreases size when it hits the wall
   }
   
   if (ballY - ballSize/2 < 0) { //bounce off the top 
     ballY = 0 + ballSize/2;
     ballVY = -ballVY;
+    ballSize = ballSize - 10; //ball decreases size when it hits the wall
   }
 }
 
