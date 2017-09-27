@@ -7,6 +7,7 @@ int numStatic = 1000;
 int staticSizeMin = 1;
 int staticSizeMax = 3;
 color staticColor = color(200);
+int hue; //variable for the hue change-------------------------------------CHANGED
 
 //variables for the location, speed, color and size of the paddle
 int paddleX;
@@ -35,6 +36,10 @@ int ball2_Speed = 5;
 int ball2_Size = 16;
 color ball2_Color = color(255,50,50);
 boolean reverse = false;
+
+//variables for the hit count -------------------------------------CHANGED
+
+int hitCount;
 
 void setup() {
   size(640, 480); 
@@ -80,6 +85,8 @@ void draw() {
   drawBall();
   drawCircle();//-------------------------------------CHANGED
   updateCircle();
+  
+  
 }
 
 void drawStatic() {
@@ -89,6 +96,10 @@ void drawStatic() {
    float y = random(0,height);
    // generates random sizes for the rectangles in the background
    float staticSize = random(staticSizeMin,staticSizeMax);
+    
+    colorMode(HSB);//changed mode to HSB---------------------------------------------CHANGED
+    staticColor = color(hue,hue,hue);//made the color of the static dynamic 
+   
    fill(staticColor);
    //draws the static
    rect(x,y,staticSize,staticSize);
@@ -110,6 +121,7 @@ void updateBall() {
   handleBallHitPaddle();
   handleBallHitWall();
   handleBallOffBottom();
+  displayHitCount(); //calls the function to update the score//-------------------------------------CHANGED
 }
 
 void updateCircle() { //movement of the red ball //-------------------------------------CHANGED
@@ -129,6 +141,7 @@ void updateCircle() { //movement of the red ball //-----------------------------
 
 void drawPaddle() {
   //draws the shape of the paddle
+  colorMode(RGB);
   rectMode(CENTER);
   noStroke();
   fill(paddleColor);
@@ -137,6 +150,7 @@ void drawPaddle() {
 
 void drawBall() {
   //draws the shape of the ball 
+  colorMode(RGB);
   rectMode(CENTER);
   noStroke();
   fill(ballColor);
@@ -144,17 +158,23 @@ void drawBall() {
 }
 
 void drawCircle () { //draws second ball //-------------------------------------CHANGED
+  colorMode(RGB);
   fill(ball2_Color);
   ellipse(ball2_X, ball2_Y, ball2_Size, ball2_Size);
 }
 
-
+void displayHitCount (){ //displays the score-------------------------------------------------CHANGED
+  textSize(480);
+  text (hitCount,0,height);
+}
 
 void handleBallHitPaddle() {
   if (ballOverlapsPaddle()) { //if the ball makes contact with the paddle then the speed is reversed and it bounces
     ballY = paddleY - paddleHeight/2 - ballSize/2; //avoids the intersection of the ball and the paddle
     ballVY = -ballVY; //reverses speed
     ballSize = ballSize + 20; //ball increases size every time it hits the paddle //-------------------------------------CHANGED
+    hitCount ++;//adds one to the score-------------------------------------CHANGED
+    hue = hue + 10; //shifts the color of the static
   }
 }
 
@@ -178,6 +198,8 @@ void handleBallOffBottom() { //reset the ball if it is not caught by the paddle
   if (ballOffBottom()) {
     ballX = width/2;
     ballY = height/2;
+    hitCount = 0; //resets the counter when you lose//-------------------------------------CHANGED
+    hue = 0; //resets the hue of the static
   }
 }
 
