@@ -7,8 +7,9 @@ void setup() {
   size(640,480);
   background(backgroundColor);
   //2 new and different balls are being created using the class Bouncer
-  bouncer = new Bouncer(width/2,height/2,2,2,50,color(150,0,0,50),color(255,0,0,50));
-  bouncer2 = new Bouncer(width/2,height/2,-2,2,50,color(0,0,150,50),color(0,0,255,50));
+  //-------------------------------------------------------------------------CHANGED
+  bouncer = new Bouncer(width/2,height/2,2,2,50,color(150,0,0,30),color(255,0,0,30),color(255,67,80,15));
+  bouncer2 = new Bouncer(width/2,height/2,-2,2,50,color(0,0,150,30),color(0,0,255,30),color(0,255,49,15));
 }
 
 void draw() {
