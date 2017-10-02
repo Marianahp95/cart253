@@ -43,8 +43,10 @@ class Bouncer {
    if (x - size/2 < 0 || x + size/2 > width) {
     vx = -vx;
     bounceOn = !bounceOn; //------------------------------CHANGED
-    x = -x;//teleports to the other side of the screen when it bounces on the left or right side
-   }
+    x = -x;//teleports to the other side of the screen when it bounces on the right side
+    size = size-5;//size decreases with each bounce on the left side
+   
+ }
    
    //the ball bounces when it touches either the top or the bottom of the screen
    if (y - size/2 < 0 || y + size/2 > height) {
@@ -61,6 +63,11 @@ class Bouncer {
      if (bounceOn){
        fillColor = bounceColor;  
      }
+ }
+ 
+ void directionChange(){//------------------------------CHANGED
+   vx = -vx;
+   size++;
  }
  
  void handleMouse() {
