@@ -80,10 +80,13 @@ class Ball {
   // something like an int (e.g. 0 = not off, 1 = off left, 2 = off right)
   // or a String (e.g. "ON SCREEN", "OFF LEFT", "OFF RIGHT")
   
-  boolean isOffScreen() {
-    return (x + SIZE/2 < 0 || x - SIZE/2 > width);
+  boolean isOffScreenP1() {
+    return (x + SIZE/2 < 0);
   }
 
+ boolean isOffScreenP2() {
+    return (x - SIZE/2 > width);
+  }
   // collide(Paddle paddle)
   //
   // Checks whether this ball is colliding with the paddle passed as an argument

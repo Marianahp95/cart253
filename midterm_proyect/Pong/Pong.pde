@@ -4,7 +4,7 @@
 // Allows to people to bounce a ball back and forth between
 // two paddles that they control.
 //
-// No scoring. (Yet!)
+// No scoring. (Yet!) CHECK!
 // No score display. (Yet!)
 // Pretty ugly. (Now!)
 // Only two paddles. (So far!)
@@ -16,6 +16,9 @@ Ball ball;
 
 // The distance from the edge of the window a paddle should be
 int PADDLE_INSET = 8;
+
+int p1_score;
+int p2_score;
 
 // The background colour during play (black)
 color backgroundColor = color(0);
@@ -35,7 +38,7 @@ void setup() {
   // NOTE: On a mac you can run into trouble if you use keys that create that popup of
   // different accented characters in text editors (so avoid those if you're changing this)
   leftPaddle = new Paddle(PADDLE_INSET, height/2, '1', 'q');
-  rightPaddle = new Paddle(width - PADDLE_INSET, height/2, '0', 'p');
+  rightPaddle = new Paddle(width - PADDLE_INSET, height/2, '0', 'o');
 
   // Create the ball at the centre of the screen
   ball = new Ball(width/2, height/2);
@@ -59,10 +62,19 @@ void draw() {
   ball.collide(leftPaddle);
   ball.collide(rightPaddle);
 
-  // Check if the ball has gone off the screen
-  if (ball.isOffScreen()) {
+  // Check if the ball has gone off the left side of the screen 
+  if (ball.isOffScreenP1()) {
     // If it has, reset the ball
     ball.reset();
+    p2_score ++;
+  }
+  
+  // Check if the ball has gone off the right screen
+  if (ball.isOffScreenP2()) {
+    // If it has, reset the ball
+    ball.reset();
+    p1_score ++;
+   
   }
 
   // Display the paddles and the ball
