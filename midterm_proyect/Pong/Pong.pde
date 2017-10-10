@@ -20,8 +20,11 @@ int PADDLE_INSET = 8;
 int p1_score;
 int p2_score;
 
+int red;
+int blue;
+
 // The background colour during play (black)
-color backgroundColor = color(0);
+color backgroundColor;
 
 
 // setup()
@@ -51,7 +54,10 @@ void setup() {
 
 void draw() {
   // Fill the background each frame so we have animation
+  backgroundColor = color (red, 0, blue );
   background(backgroundColor);
+  println("p1 " + p1_score);
+  println("p2 " + p2_score);
 
   // Update the paddles and ball by calling their update methods
   leftPaddle.update();
@@ -65,22 +71,26 @@ void draw() {
   // Check if the ball has gone off the left side of the screen 
   if (ball.isOffScreenP1()) {
     // If it has, reset the ball
-    ball.reset();
     p2_score ++;
+    if (mousePressed == true){
+       ball.reset();
+    }
+   
   }
   
   // Check if the ball has gone off the right screen
   if (ball.isOffScreenP2()) {
     // If it has, reset the ball
-    ball.reset();
     p1_score ++;
-   
+    ball.restart();
+    }
   }
 
   // Display the paddles and the ball
   leftPaddle.display();
   rightPaddle.display();
   ball.display();
+  
 }
 
 // keyPressed()

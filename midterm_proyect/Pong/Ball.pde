@@ -62,6 +62,12 @@ class Ball {
     }
   }
   
+  void restart() {
+    if (mousePressed == true && ball.isOffScreenP2()){
+      vx = -vx;
+      ball.reset();
+  }
+  
   // reset()
   //
   // Resets the ball to the centre of the screen.
