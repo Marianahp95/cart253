@@ -62,12 +62,6 @@ class Ball {
     }
   }
   
-  void restart() {
-    if (mousePressed == true && ball.isOffScreenP2()){
-      vx = -vx;
-      ball.reset();
-  }
-  
   // reset()
   //
   // Resets the ball to the centre of the screen.
@@ -76,6 +70,8 @@ class Ball {
   void reset() {
     x = width/2;
     y = height/2;
+    vx = -vx;
+    vy = -vy; 
   }
   
   // isOffScreen()
@@ -89,10 +85,11 @@ class Ball {
   boolean isOffScreenP1() {
     return (x + SIZE/2 < 0);
   }
-
- boolean isOffScreenP2() {
+  
+  boolean isOffScreenP2() {
     return (x - SIZE/2 > width);
   }
+
   // collide(Paddle paddle)
   //
   // Checks whether this ball is colliding with the paddle passed as an argument

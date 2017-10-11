@@ -14,6 +14,7 @@ Paddle leftPaddle;
 Paddle rightPaddle;
 Ball ball;
 
+
 // The distance from the edge of the window a paddle should be
 int PADDLE_INSET = 8;
 
@@ -33,7 +34,7 @@ color backgroundColor;
 
 void setup() {
   // Set the size
-  size(640, 480);
+  size(900, 480);
 
   // Create the paddles on either side of the screen. 
   // Use PADDLE_INSET to to position them on x, position them both at centre on y
@@ -45,6 +46,7 @@ void setup() {
 
   // Create the ball at the centre of the screen
   ball = new Ball(width/2, height/2);
+  
 }
 
 // draw()
@@ -56,9 +58,7 @@ void draw() {
   // Fill the background each frame so we have animation
   backgroundColor = color (red, 0, blue );
   background(backgroundColor);
-  println("p1 " + p1_score);
-  println("p2 " + p2_score);
-
+ 
   // Update the paddles and ball by calling their update methods
   leftPaddle.update();
   rightPaddle.update();
@@ -68,23 +68,59 @@ void draw() {
   ball.collide(leftPaddle);
   ball.collide(rightPaddle);
 
-  // Check if the ball has gone off the left side of the screen 
+ // Check if the ball has gone off the right screen
   if (ball.isOffScreenP1()) {
-    // If it has, reset the ball
-    p2_score ++;
-    if (mousePressed == true){
-       ball.reset();
+    //add one to the P1 score
+    p1_score ++;
+    p2_score --;
+    
+    if (p2_score < 0){
+      p2_score = 0;
     }
-   
+    //make the backgorund more red to represent the red player winning
+    
+    if (blue > 0){
+      blue = 0;
+    }
+    
+    //blue = blue - 50;
+    red = red + 50;
+    
+    println("p1 " + p1_score);
+    println("p2 " + p2_score);
+
+    
+    // If it has, reset the ball
+    ball.reset();
+  }
+
+  // Check if the ball has gone off the left side of the screen 
+  if (ball.isOffScreenP2()) {
+    //add one to the P1 score
+    p2_score ++;
+    p1_score --;
+    
+    if (p1_score < 0){
+      p1_score = 0;
+    }
+    
+    if (red > 0){
+      red = 0;
+    }
+    
+    //make the backgorund more blue to represent the blue player winning
+    //red = red - 50;
+    blue = blue + 50;
+    
+    
+    println("p1 " + p1_score);
+    println("p2 " + p2_score);
+  
+    // If it has, reset the ball
+    ball.reset();
   }
   
-  // Check if the ball has gone off the right screen
-  if (ball.isOffScreenP2()) {
-    // If it has, reset the ball
-    p1_score ++;
-    ball.restart();
-    }
-  }
+ 
 
   // Display the paddles and the ball
   leftPaddle.display();
@@ -92,6 +128,7 @@ void draw() {
   ball.display();
   
 }
+
 
 // keyPressed()
 //
@@ -103,6 +140,7 @@ void keyPressed() {
   // Just call both paddles' own keyPressed methods
   leftPaddle.keyPressed();
   rightPaddle.keyPressed();
+  
 }
 
 // keyReleased()
