@@ -35,7 +35,13 @@ int gamePoint_p2;
 int red;
 int blue;
 
+int barX = 20;
+int barY = 6000;
+
 int tSize = 400; //size of the set score
+
+int opacity; //opacity of the winniner phrase
+boolean win = false; //indicates whether someone has won
 
 // The background colour during play (black)
 color backgroundColor;
@@ -120,10 +126,6 @@ void draw() {
     //blue = blue - 50;
     red = red + 25;
     
-    println("p1 " + p1_score);
-    println("p2 " + p2_score);
-
-    
     // If it has, reset the ball
     ball.reset();
   }
@@ -145,10 +147,7 @@ void draw() {
     //make the backgorund more blue to represent the blue player winning
     //red = red - 50;
     blue = blue + 25;
-    
-    
-    println("p1 " + p1_score);
-    println("p2 " + p2_score);
+   
   
     // If it has, reset the ball
     ball.reset();
@@ -164,6 +163,10 @@ void draw() {
   rightPaddle2.display();
   
   ball.display();
+  
+  if (win){
+    opacity ++;
+  }
   
 }
 

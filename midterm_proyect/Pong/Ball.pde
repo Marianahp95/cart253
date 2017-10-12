@@ -70,11 +70,11 @@ class Ball {
   void reset() {
     x = width/2;
     y = height/2;
-    vx = -vx;
+    vx = -vx; //everytime the ball is reset the direction gets inverted
     vy = -vy; 
   }
   
-  void stopBall() {
+  void stopBall() { //stops the movement of the ball
     reset();
     vx = 0;
     vy = 0; 
@@ -117,41 +117,49 @@ class Ball {
     
     if (gamePoint_p1 == 3){ //when the red player reaches 3 game points he wins
       println("ROJO CAMPEON");
+      textSize(100);
+      fill(#D8344A, opacity);
+      text("Roses are red", width/2, height/4);
       stopBall();
+      win = true;
     }
     
     if (gamePoint_p2 == 3){//when the blue player reaches 3 game points he wins
       println("AZUL CAMPEON");
+      textSize(100);
+      fill(#50B1FF, opacity);
+      text("Violets are blue", width/2, height/4);
       stopBall();
+      win = true;
     }
   }
   
   void gamePointMark(){
-    if (gamePoint_p1 == 1){ //displays 1 ball to represent match won by red
+    if (gamePoint_p1 == 1){ //displays 1 bar to represent match won by red
       fill(255, 50);
       noStroke();
       rectMode(CENTER);
-      rect(width - 100, 0, 20, 6000);
+      rect(width - 100, 0, barX, barY);
     } 
     
-    if (gamePoint_p1 == 2){ //displays 2 balls to represent 2 matches won by red
+    if (gamePoint_p1 == 2){ //displays 2 bars to represent 2 matches won by red
       fill(255, 50);
       noStroke();
-      rect(width - 100, 0, 20, 6000);
-      rect(width - 200, 0, 20, 6000);
+      rect(width - 100, 0, barX, barY);
+      rect(width - 200, 0, barX, barY);
     } 
     
-    if (gamePoint_p2 == 1){ //displays 1 ball to represent match won by blue
+    if (gamePoint_p2 == 1){ //displays 1 bar to represent match won by blue
       fill(255, 50);
       noStroke();
-      ellipse(100, 0, 20, 6000);
+      ellipse(100, 0, barX, barY);
     } 
     
-    if (gamePoint_p2 == 2){ //displays 2 balls to represent 2 matches won by blue
+    if (gamePoint_p2 == 2){ //displays 2 bars to represent 2 matches won by blue
       fill(255, 50);
       noStroke();
-      ellipse(100, 0 , 20, 6000);
-      ellipse(200, 0, 20, 6000);
+      ellipse(100, 0 , barX, barY);
+      ellipse(200, 0, barX, barY);
     } 
     
      
