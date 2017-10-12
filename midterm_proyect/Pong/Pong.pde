@@ -7,7 +7,7 @@
 // No scoring. (Yet!) CHECK!
 // No score display. (Yet!)
 // Pretty ugly. (Now!)
-// Only two paddles. (So far!)
+// Only two paddles. (So far!) There's 4 now :)
 
 // Global variables for the paddles and the ball
 Paddle leftPaddle;
@@ -20,12 +20,17 @@ Ball ball;
 
 
 // The distance from the edge of the window a paddle should be
-int PADDLE_INSET = 8;
+int PADDLE_INSET = 11;
 //Second paddle's distance
 int PADDLE_INSET_2 = 600;
 
+//scores for each game
 int p1_score;
 int p2_score;
+
+//sum of games won
+int gamePoint_p1;
+int gamePoint_p2;
 
 int red;
 int blue;
@@ -77,6 +82,8 @@ void draw() {
   rightPaddle2.update();
   
   ball.update();
+  
+  ball.checkWin(); //checks if someone won 
 
   // Check if the ball has collided with either paddle
   ball.collide(leftPaddle);

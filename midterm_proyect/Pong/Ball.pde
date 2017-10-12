@@ -74,6 +74,11 @@ class Ball {
     vy = -vy; 
   }
   
+  void stopBall() {
+    reset();
+    vx = 0;
+    vy = 0; 
+  }
   // isOffScreen()
   //
   // Returns true if the ball is off the left or right side of the window
@@ -88,6 +93,37 @@ class Ball {
   
   boolean isOffScreenP2() {
     return (x - SIZE/2 > width);
+  }
+
+
+//CHECK WINNER
+  void checkWin (){
+    if (p1_score == 5){
+      println("GANO ROJO");
+      gamePoint_p1 ++; //adds one gamepoint
+      p1_score= 0; //resets the score and color of the background
+      p2_score= 0;
+      red = 0;
+      blue = 0;
+    }
+    if (p2_score == 5){
+      println("GANO AZUL");
+      gamePoint_p2 ++; //adds one gamepoint
+      p1_score= 0;//resets the score and color of the background
+      p2_score= 0;
+      red = 0;
+      blue = 0;
+    }
+    
+    if (gamePoint_p1 == 3){ //when the red player reaches 3 game points he wins
+      println("ROJO CAMPEON");
+      stopBall();
+    }
+    
+    if (gamePoint_p2 == 3){//when the blue player reaches 3 game points he wins
+      println("AZUL CAMPEON");
+      stopBall();
+    }
   }
 
   // collide(Paddle paddle)
