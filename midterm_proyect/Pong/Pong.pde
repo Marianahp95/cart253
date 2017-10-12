@@ -43,6 +43,10 @@ int tSize = 400; //size of the set score
 int opacity; //opacity of the winniner phrase
 boolean win = false; //indicates whether someone has won
 
+boolean activSP = false;// indicates whether the special key was activated
+int spCount; //counts how many times was the special key used 
+boolean spOver = false; //indicates if the special key can still be used
+
 // The background colour during play (black)
 color backgroundColor;
 
@@ -184,6 +188,14 @@ void keyPressed() {
   
   leftPaddle2.keyPressed();
   rightPaddle2.keyPressed();
+  
+  if (key == 'u' && !activSP && !spOver){
+    ball.changeDirection();
+  }
+  
+  if (key == 'e' && activSP && !spOver){
+    ball.changeDirection();
+  }
   
 }
 

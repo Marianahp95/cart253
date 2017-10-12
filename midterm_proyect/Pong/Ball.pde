@@ -79,6 +79,16 @@ class Ball {
     vx = 0;
     vy = 0; 
   }
+  
+  void changeDirection(){
+    vx = -vx; //the direction gets inverted when a player activates their special key
+    vy = -vy;
+    activSP = !activSP; //indicates who's turn it is tu use the special key
+    spCount ++; //adds to the count of special key uses
+    if (spCount >= 4){ //blocks the special keys after 4 uses
+      spOver = true; 
+    }
+  }
   // isOffScreen()
   //
   // Returns true if the ball is off the left or right side of the window
@@ -201,6 +211,15 @@ class Ball {
   void display() {
     // Set up the appearance of the ball (no stroke, a fill, and rectMode as CENTER)
     noStroke();
+    
+    if(!activSP && !spOver){ //changes colors to indicate who can use the special key and if they can do it ///////CHECAAAAA
+      ballColor = color(#D8344A);
+    }
+    
+    if(activSP && !spOver){
+      ballColor = color(#50B1FF);
+    }
+    
     fill(ballColor);
     rectMode(CENTER);
     
