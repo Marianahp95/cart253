@@ -126,31 +126,32 @@ class Ball {
     }
   }
   
-  void gamePointBall(){
+  void gamePointMark(){
     if (gamePoint_p1 == 1){ //displays 1 ball to represent match won by red
       fill(255, 50);
       noStroke();
-      ellipse(width - 100, 100, SIZE*1.5, SIZE*1.5);
+      rectMode(CENTER);
+      rect(width - 100, 0, 20, 6000);
     } 
     
     if (gamePoint_p1 == 2){ //displays 2 balls to represent 2 matches won by red
       fill(255, 50);
       noStroke();
-      ellipse(width - 100, 100, SIZE*1.5, SIZE*1.5);
-      ellipse(width - 200, 100, SIZE*1.5, SIZE*1.5);
+      rect(width - 100, 0, 20, 6000);
+      rect(width - 200, 0, 20, 6000);
     } 
     
     if (gamePoint_p2 == 1){ //displays 1 ball to represent match won by blue
       fill(255, 50);
       noStroke();
-      ellipse(100, height - 100, SIZE*1.5, SIZE*1.5);
+      ellipse(100, 0, 20, 6000);
     } 
     
-    if (gamePoint_p1 == 2){ //displays 2 balls to represent 2 matches won by red
+    if (gamePoint_p2 == 2){ //displays 2 balls to represent 2 matches won by blue
       fill(255, 50);
       noStroke();
-      ellipse(100, height - 100, SIZE*1.5, SIZE*1.5);
-      ellipse(200, height - 100, SIZE*1.5, SIZE*1.5);
+      ellipse(100, 0 , 20, 6000);
+      ellipse(200, 0, 20, 6000);
     } 
     
      
@@ -195,15 +196,17 @@ class Ball {
     fill(ballColor);
     rectMode(CENTER);
     
+    textFont(font);
+    
     //set scores 
     fill(255,red);
      textSize(tSize);
-     textAlign(CENTER, TOP);
-      text(p1_score,width/2, height/2);
+     textAlign(CENTER, CENTER);
+      text(p1_score,width/2, height/2 - 50);
       
       fill(255,blue);
-      textAlign(CENTER, BOTTOM);
-      text(p2_score,width/2, height/2);
+      textAlign(CENTER, CENTER);
+      text(p2_score,width/2, height/2 - 50);
 
     fill(255);
     // Draw the ball

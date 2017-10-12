@@ -5,7 +5,7 @@
 // two paddles that they control.
 //
 // No scoring. (Yet!) CHECK!
-// No score display. (Yet!)
+// No score display. (Yet!) DONE
 // Pretty ugly. (Now!)
 // Only two paddles. (So far!) There's 4 now :)
 
@@ -35,10 +35,13 @@ int gamePoint_p2;
 int red;
 int blue;
 
-int tSize = 200; //size of the set score
+int tSize = 400; //size of the set score
 
 // The background colour during play (black)
 color backgroundColor;
+
+//number font
+PFont font;
 
 
 // setup()
@@ -63,6 +66,9 @@ void setup() {
 
   // Create the ball at the centre of the screen
   ball = new Ball(width/2, height/2);
+  
+  //load the font
+  font = createFont("KGLifeisMessy.ttf", 700);
   
 }
 
@@ -94,7 +100,7 @@ void draw() {
   ball.collide(leftPaddle2);
   ball.collide(rightPaddle2);
   
-  ball.gamePointBall(); //show the ball that indicates the number of sets won 
+  ball.gamePointMark(); //show the bar that indicates the number of sets won 
 
  // Check if the ball has gone off the right screen
   if (ball.isOffScreenP1()) {
@@ -112,7 +118,7 @@ void draw() {
     }
     
     //blue = blue - 50;
-    red = red + 50;
+    red = red + 25;
     
     println("p1 " + p1_score);
     println("p2 " + p2_score);
@@ -138,7 +144,7 @@ void draw() {
     
     //make the backgorund more blue to represent the blue player winning
     //red = red - 50;
-    blue = blue + 50;
+    blue = blue + 25;
     
     
     println("p1 " + p1_score);
