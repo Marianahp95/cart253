@@ -35,6 +35,8 @@ int gamePoint_p2;
 int red;
 int blue;
 
+int tSize = 200; //size of the set score
+
 // The background colour during play (black)
 color backgroundColor;
 
@@ -91,6 +93,8 @@ void draw() {
   
   ball.collide(leftPaddle2);
   ball.collide(rightPaddle2);
+  
+  ball.gamePointBall(); //show the ball that indicates the number of sets won 
 
  // Check if the ball has gone off the right screen
   if (ball.isOffScreenP1()) {
