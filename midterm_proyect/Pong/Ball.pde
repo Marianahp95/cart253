@@ -20,7 +20,7 @@ class Ball {
   int vy;
 
   // The colour of the ball
-  color ballColor = color(255);
+  color ballColor;
 
 
   /////////////// Constructor ///////////////
@@ -34,9 +34,10 @@ class Ball {
   // NOTE that I'm using an underscore in front of the arguments to distinguish
   // them from the class's properties
 
-  Ball(int _x, int _y) {
+  Ball(int _x, int _y, color _ballCol) {
     x = _x;
     y = _y;
+    ballColor = _ballCol;
     vx = SPEED;
     vy = SPEED;
   }
@@ -60,6 +61,28 @@ class Ball {
       // If it is, then make it "bounce" by reversing its velocity
       vy = -vy;
     }
+  }
+  
+  void updateRev() {
+    // First update the location based on the velocity (so the ball moves)
+    x += vx;
+    y += vy;
+
+    // Check if the ball is going off the top of bottom
+    if (y - SIZE/2 < 0 || y + SIZE/2 > height) {
+      // If it is, then make it "bounce" by reversing its velocity
+      vy = -vy;
+    }
+    
+    if (x - SIZE/2 < 0 || x + SIZE/2 > width){
+      vx = -vx;
+    }
+    
+    if (reverse){
+         //ACTIVATE REVERSE MODE
+          reverse = true;
+          println("REVRESEEE");
+      }
   }
   
   // reset()
@@ -199,10 +222,38 @@ class Ball {
         // Reset its position to align with the left side of the paddle
         x = paddle.x - paddle.WIDTH/2 - SIZE/2;
       }
+      
       // And make it bounce
       vx = -vx;
     }
   }
+  
+  void collideRev(Paddle paddle) {
+    // Calculate possible overlaps with the paddle side by side
+    boolean insideLeft = (x + SIZE/2 > paddle.x - paddle.WIDTH/2);
+    boolean insideRight = (x - SIZE/2 < paddle.x + paddle.WIDTH/2);
+    boolean insideTop = (y + SIZE/2 > paddle.y - paddle.HEIGHT/2);
+    boolean insideBottom = (y - SIZE/2 < paddle.y + paddle.HEIGHT/2);
+    
+    // Check if the ball overlaps with the paddle
+    if (insideLeft && insideRight && insideTop && insideBottom) {
+      // If it was moving to the left
+      if (vx < 0) {
+        // Reset its position to align with the right side of the paddle
+        x = paddle.x + paddle.WIDTH/2 + SIZE/2;
+      } else if (vx > 0) {
+        // Reset its position to align with the left side of the paddle
+        x = paddle.x - paddle.WIDTH/2 - SIZE/2;
+      }
+      
+      //REVERSE MODE
+      reverse = !reverse;
+      println("reverseee");
+      // And make it bounce
+      vx = -vx;
+    }
+  }
+  
 
   // display()
   //
@@ -211,14 +262,6 @@ class Ball {
   void display() {
     // Set up the appearance of the ball (no stroke, a fill, and rectMode as CENTER)
     noStroke();
-    
-    if(!activSP && !spOver){ //changes colors to indicate who can use the special key and if they can do it ///////CHECAAAAA
-      ballColor = color(#D8344A);
-    }
-    
-    if(activSP && !spOver){
-      ballColor = color(#50B1FF);
-    }
     
     fill(ballColor);
     rectMode(CENTER);
@@ -236,7 +279,24 @@ class Ball {
       text(p2_score,width/2, height/2 - 50);
 
     fill(255);
+    
+    //if(!activSP && !spOver){ //changes colors to indicate who can use the special key and if they can do it ///////CHECAAAAA
+    //  ballColor = color(#D8344A);
+    //}
+    
+    //if(activSP && !spOver){
+    //  ballColor = color(#50B1FF);
+    //}
     // Draw the ball
     rect(x, y, SIZE, SIZE);
+  }
+  
+  void displayREVERSE(){
+    if (reverse){
+     fill(#FFB846);
+    }else{
+     fill(#9B46FF); 
+    }
+    ellipse(x, y, SIZE, SIZE);
   }
 }

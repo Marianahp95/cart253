@@ -78,13 +78,18 @@ class Paddle {
     rect(x, y, WIDTH, HEIGHT);
   }
 
+   void reverseMode(){
+     upKey = downKey;
+     downKey = upKey;
+   }
+   
   // keyPressed()
   //
   // Called when keyPressed is called in the main program
   
   void keyPressed() {
     // Check if the key is our up key
-    if (key == upKey) {
+    if (key == upKey ) {
       // If so we want a negative y velocity
       vy = -SPEED;
     } // Otherwise check if the key is our down key 

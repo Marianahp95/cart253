@@ -1,15 +1,20 @@
-// Pong
+// Awesome Pong <3
 //
-// A simple version of Pong using object-oriented programming.
-// Allows to people to bounce a ball back and forth between
-// two paddles that they control.
-//
-// No scoring. (Yet!) CHECK!
-// No score display. (Yet!) DONE
-// Pretty ugly. (Now!)
-// Only two paddles. (So far!) There's 4 now :)
+// The player on the right controls his paddle with 'o' & '0' and his enemy territory paddle with 'i' & '9'
+// His special key that changes the direction of the ball is 'u'
+//The player on the left controls his paddle with 'q' & '1' and his enemy territory paddle with 'w' & '2'
+// His special key that changes the direction of the ball is 'e'
+// The player on the right gets to use the special key first and the player on the left can' use it until the other one does
+// Each player gets to use it 2 times, alternating with each other (so 4 in total)
 
-// Global variables for the paddles and the ball
+// When a player reaches a score of 5 he/she wins a set, when a player wins 3 sets he/she wins the whole game. 
+
+//restart
+//graphics
+//paddle invert ball
+//image map generate
+
+// Global variables for the paddles and the balls
 Paddle leftPaddle;
 Paddle rightPaddle;
 
@@ -17,6 +22,7 @@ Paddle leftPaddle2;
 Paddle rightPaddle2;
 
 Ball ball;
+Ball revBall; //reverse ball
 
 
 // The distance from the edge of the window a paddle should be
@@ -50,12 +56,12 @@ boolean spOver = false; //indicates if the special key can still be used
 // The background colour during play (black)
 color backgroundColor;
 
+// indicates if the paddles are reversed
+boolean reverse = false;
+
 //number font
 PFont font;
 
-
-// setup()
-//
 // Sets the size and creates the paddles and ball
 
 void setup() {
@@ -75,7 +81,10 @@ void setup() {
   rightPaddle2 = new Paddle(width - PADDLE_INSET_2, height/2, '9', 'i');
 
   // Create the ball at the centre of the screen
-  ball = new Ball(width/2, height/2);
+  ball = new Ball(width/2, height/2, 255);
+  
+  
+  revBall = new Ball(width/2, height-30, 255);
   
   //load the font
   font = createFont("KGLifeisMessy.ttf", 700);
@@ -100,6 +109,7 @@ void draw() {
   rightPaddle2.update();
   
   ball.update();
+  revBall.updateRev();
   
   ball.checkWin(); //checks if someone won 
 
@@ -109,6 +119,10 @@ void draw() {
   
   ball.collide(leftPaddle2);
   ball.collide(rightPaddle2);
+  
+  revBall.collideRev(leftPaddle);
+  revBall.collideRev(rightPaddle);
+  
   
   ball.gamePointMark(); //show the bar that indicates the number of sets won 
 
@@ -133,6 +147,7 @@ void draw() {
     // If it has, reset the ball
     ball.reset();
   }
+  
 
   // Check if the ball has gone off the left side of the screen 
   if (ball.isOffScreenP2()) {
@@ -167,7 +182,9 @@ void draw() {
   rightPaddle2.display();
   
   ball.display();
+  revBall.displayREVERSE();
   
+  //the winning message fades in
   if (win){
     opacity ++;
   }
@@ -191,6 +208,7 @@ void keyPressed() {
   
   if (key == 'u' && !activSP && !spOver){
     ball.changeDirection();
+    
   }
   
   if (key == 'e' && activSP && !spOver){
