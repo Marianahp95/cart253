@@ -1,7 +1,7 @@
 // Griddies
 // by Pippin Barr
 // MODIFIED BY: 
-//
+// Mai Hernandez :)
 // A simple artificial life system on a grid. The "griddies" are squares that move
 // around randomly, using energy to do so. They gain energy by overlapping with
 // other griddies. If a griddie loses all its energy it dies.
@@ -21,6 +21,7 @@ void setup() {
   frameRate(10);
 
   // QUESTION: What does this for loop do?
+  // it goes through the whole array generating the griddies in random places within the grid and it makes them the size of one square in the grid 
   for (int i = 0; i < griddies.length; i++) {
     int x = floor(random(0, width/gridSize));
     int y = floor(random(0, height/gridSize));
@@ -44,8 +45,10 @@ void draw() {
     // Now go through all the griddies a second time...
     for (int j = 0; j < griddies.length; j++) {
       // QUESTION: What is this if-statement for?
+      // this is veryfing that the griddie is not giving itself life, without it the griddies never die because the collide is activated when they are colliding with themselves
       if (j != i) {
         // QUESTION: What does this line check?
+        // it checks whether the griddies are coming in contact with other griddies and calling the collide function
         griddies[i].collide(griddies[j]);
       }
     }

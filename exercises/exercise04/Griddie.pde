@@ -36,17 +36,21 @@ class Griddie {
   void update() {
     
     // QUESTION: What is this if-statement for?
+    // it checks if the griddie ran out of energy (died) and returns a true or false
     if (energy == 0) {
       return;
     }
     
     // QUESTION: How does the Griddie movement updating work?
+    // the griddie can randomly move in -1, 0 or 1 in x and y direction within the spots in the grid (that' why it's multiplied by size)
     int xMoveType = floor(random(-1,2));
     int yMoveType = floor(random(-1,2));
     x += size * xMoveType;
     y += size * yMoveType;
     
     // QUESTION: What are these if statements doing?
+    // they are checking whether the griddies are trying to escape the grid (position outside the screen) and preventing them from doing so by
+    // either adding or substracting from the width and height, keeping the inside the grid.
     if (x < 0) {
       x += width;
     }
@@ -75,11 +79,13 @@ class Griddie {
   
   void collide(Griddie other) {
     // QUESTION: What is this if-statement for?
+    //it checks if either of the griddies are dead and collide doesn't get executed if they are
     if (energy == 0 || other.energy == 0) {
       return;
     }
     
     // QUESTION: What does this if-statement check?
+    //it checks if the griddie is intersecting with another griddie, if it is then the collide energy is added to it
     if (x == other.x && y == other.y) {
       // Increase this Griddie's energy
       energy += collideEnergy;
@@ -93,6 +99,7 @@ class Griddie {
   // Draw the Griddie on the screen as a rectangle
   void display() {
     // QUESTION: What does this fill line do?
+    // it shows the amount of energy the griddies have by displaying their health in their color opacity 
     fill(fill, energy); 
     noStroke();
     rect(x, y, size, size);
