@@ -9,11 +9,6 @@
 
 // When a player reaches a score of 5 he/she wins a set, when a player wins 3 sets he/she wins the whole game. 
 
-//restart
-//graphics
-//paddle invert ball
-//image map generate
-
 // Global variables for the paddles and the balls
 Paddle leftPaddle;
 Paddle rightPaddle;
@@ -83,7 +78,7 @@ void setup() {
   // Create the ball at the centre of the screen
   ball = new Ball(width/2, height/2, 255);
   
-  
+  //creating the reversing ball higher than the normal one
   revBall = new Ball(width/2, height-30, 255);
   
   //load the font
@@ -206,6 +201,7 @@ void keyPressed() {
   leftPaddle2.keyPressed();
   rightPaddle2.keyPressed();
   
+  //changes the direction of the ball when the special key is activated and it is the players turn to use it and it hasn't been used more than 4 times
   if (key == 'u' && !activSP && !spOver){
     ball.changeDirection();
     

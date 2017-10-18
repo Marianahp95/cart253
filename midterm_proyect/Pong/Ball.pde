@@ -80,8 +80,10 @@ class Ball {
     
     if (reverse){
          //ACTIVATE REVERSE MODE
-          reverse = true;
           println("REVRESEEE");
+          
+      }else{
+          println("NOT REVRESEEE");
       }
   }
   
@@ -237,18 +239,8 @@ class Ball {
     
     // Check if the ball overlaps with the paddle
     if (insideLeft && insideRight && insideTop && insideBottom) {
-      // If it was moving to the left
-      if (vx < 0) {
-        // Reset its position to align with the right side of the paddle
-        x = paddle.x + paddle.WIDTH/2 + SIZE/2;
-      } else if (vx > 0) {
-        // Reset its position to align with the left side of the paddle
-        x = paddle.x - paddle.WIDTH/2 - SIZE/2;
-      }
-      
-      //REVERSE MODE
+      //PADDLE REVERSE MODE
       reverse = !reverse;
-      println("reverseee");
       // And make it bounce
       vx = -vx;
     }
@@ -293,6 +285,10 @@ class Ball {
   
   void displayREVERSE(){
     if (reverse){
+     textSize(50);
+     textAlign(CENTER, CENTER);
+     fill(255, 20);
+     text("REVERSE", width/2, 40);
      fill(#FFB846);
     }else{
      fill(#9B46FF); 
