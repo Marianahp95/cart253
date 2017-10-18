@@ -1,4 +1,5 @@
 // Awesome Pong <3
+// by Mariana Hernández
 //
 // The player on the right controls his paddle with 'o' & '0' and his enemy territory paddle with 'i' & '9'
 // His special key that changes the direction of the ball is 'u'
@@ -6,6 +7,7 @@
 // His special key that changes the direction of the ball is 'e'
 // The player on the right gets to use the special key first and the player on the left can' use it until the other one does
 // Each player gets to use it 2 times, alternating with each other (so 4 in total)
+// If any of the players hit the reverse ball the controls of all the paddles will be reversed until someone hits the ball again
 
 // When a player reaches a score of 5 he/she wins a set, when a player wins 3 sets he/she wins the whole game. 
 
@@ -33,9 +35,11 @@ int p2_score;
 int gamePoint_p1;
 int gamePoint_p2;
 
+//variables for the background color changes
 int red;
 int blue;
 
+//positions of the score bars
 int barX = 20;
 int barY = 6000;
 

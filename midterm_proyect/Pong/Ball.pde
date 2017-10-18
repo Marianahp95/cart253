@@ -62,56 +62,48 @@ class Ball {
       vy = -vy;
     }
   }
-  
-  void updateRev() {
+
+  void updateRev() { //different update function for the reverse ball so it will bounce on every side
     // First update the location based on the velocity (so the ball moves)
     x += vx;
     y += vy;
 
-    // Check if the ball is going off the top of bottom
+    // Check if the ball is going off the screen
     if (y - SIZE/2 < 0 || y + SIZE/2 > height) {
       // If it is, then make it "bounce" by reversing its velocity
       vy = -vy;
     }
-    
-    if (x - SIZE/2 < 0 || x + SIZE/2 > width){
+
+    if (x - SIZE/2 < 0 || x + SIZE/2 > width) {
       vx = -vx;
     }
-    
-    if (reverse){
-         //ACTIVATE REVERSE MODE
-          println("REVRESEEE");
-          
-      }else{
-          println("NOT REVRESEEE");
-      }
   }
-  
+
   // reset()
   //
   // Resets the ball to the centre of the screen.
   // Note that it KEEPS its velocity
-  
+
   void reset() {
     x = width/2;
     y = height/2;
-    vx = -vx; //everytime the ball is reset the direction gets inverted
-    vy = -vy; 
+    vx = -vx; //everytime the ball is reset the direction gets inverted tho make it more fair
+    vy = -vy;
   }
-  
+
   void stopBall() { //stops the movement of the ball
     reset();
     vx = 0;
-    vy = 0; 
+    vy = 0;
   }
-  
-  void changeDirection(){
+
+  void changeDirection() {// special key mechanic
     vx = -vx; //the direction gets inverted when a player activates their special key
     vy = -vy;
     activSP = !activSP; //indicates who's turn it is tu use the special key
     spCount ++; //adds to the count of special key uses
-    if (spCount >= 4){ //blocks the special keys after 4 uses
-      spOver = true; 
+    if (spCount >= 4) { //blocks the special keys after 4 uses
+      spOver = true;
     }
   }
   // isOffScreen()
@@ -121,46 +113,46 @@ class Ball {
   // (If we wanted to return WHICH side it had gone off, we'd have to return
   // something like an int (e.g. 0 = not off, 1 = off left, 2 = off right)
   // or a String (e.g. "ON SCREEN", "OFF LEFT", "OFF RIGHT")
-  
+
   boolean isOffScreenP1() {
     return (x + SIZE/2 < 0);
   }
-  
+
   boolean isOffScreenP2() {
     return (x - SIZE/2 > width);
   }
 
 
-//CHECK WINNER
-  void checkWin (){
-    if (p1_score == 5){
-      println("GANO ROJO");
+  //CHECK WINNER
+  void checkWin () {
+    if (p1_score == 5) {
+      //println("GANO ROJO");
       gamePoint_p1 ++; //adds one gamepoint
       p1_score= 0; //resets the score and color of the background
       p2_score= 0;
       red = 0;
       blue = 0;
     }
-    if (p2_score == 5){
-      println("GANO AZUL");
+    if (p2_score == 5) {
+      //println("GANO AZUL");
       gamePoint_p2 ++; //adds one gamepoint
       p1_score= 0;//resets the score and color of the background
       p2_score= 0;
       red = 0;
       blue = 0;
     }
-    
-    if (gamePoint_p1 == 3){ //when the red player reaches 3 game points he wins
-      println("ROJO CAMPEON");
+
+    if (gamePoint_p1 == 3) { //when the red player reaches 3 game points he wins
+      //println("ROJO CAMPEON");
       textSize(100);
       fill(#D8344A, opacity);
       text("Roses are red", width/2, height/4);
       stopBall();
       win = true;
     }
-    
-    if (gamePoint_p2 == 3){//when the blue player reaches 3 game points he wins
-      println("AZUL CAMPEON");
+
+    if (gamePoint_p2 == 3) {//when the blue player reaches 3 game points he wins
+      //println("AZUL CAMPEON");
       textSize(100);
       fill(#50B1FF, opacity);
       text("Violets are blue", width/2, height/4);
@@ -168,37 +160,34 @@ class Ball {
       win = true;
     }
   }
-  
-  void gamePointMark(){
-    if (gamePoint_p1 == 1){ //displays 1 bar to represent match won by red
+
+  void gamePointMark() {
+    if (gamePoint_p1 == 1) { //displays 1 bar to represent match won by red
       fill(255, 50);
       noStroke();
       rectMode(CENTER);
       rect(width - 100, 0, barX, barY);
     } 
-    
-    if (gamePoint_p1 == 2){ //displays 2 bars to represent 2 matches won by red
+
+    if (gamePoint_p1 == 2) { //displays 2 bars to represent 2 matches won by red
       fill(255, 50);
       noStroke();
       rect(width - 100, 0, barX, barY);
       rect(width - 200, 0, barX, barY);
     } 
-    
-    if (gamePoint_p2 == 1){ //displays 1 bar to represent match won by blue
+
+    if (gamePoint_p2 == 1) { //displays 1 bar to represent match won by blue
       fill(255, 50);
       noStroke();
       ellipse(100, 0, barX, barY);
     } 
-    
-    if (gamePoint_p2 == 2){ //displays 2 bars to represent 2 matches won by blue
+
+    if (gamePoint_p2 == 2) { //displays 2 bars to represent 2 matches won by blue
       fill(255, 50);
       noStroke();
-      ellipse(100, 0 , barX, barY);
+      ellipse(100, 0, barX, barY);
       ellipse(200, 0, barX, barY);
-    } 
-    
-     
-    
+    }
   }
 
   // collide(Paddle paddle)
@@ -213,7 +202,7 @@ class Ball {
     boolean insideRight = (x - SIZE/2 < paddle.x + paddle.WIDTH/2);
     boolean insideTop = (y + SIZE/2 > paddle.y - paddle.HEIGHT/2);
     boolean insideBottom = (y - SIZE/2 < paddle.y + paddle.HEIGHT/2);
-    
+
     // Check if the ball overlaps with the paddle
     if (insideLeft && insideRight && insideTop && insideBottom) {
       // If it was moving to the left
@@ -224,19 +213,19 @@ class Ball {
         // Reset its position to align with the left side of the paddle
         x = paddle.x - paddle.WIDTH/2 - SIZE/2;
       }
-      
+
       // And make it bounce
       vx = -vx;
     }
   }
-  
-  void collideRev(Paddle paddle) {
+
+  void collideRev(Paddle paddle) { //collide for the reversing ball
     // Calculate possible overlaps with the paddle side by side
     boolean insideLeft = (x + SIZE/2 > paddle.x - paddle.WIDTH/2);
     boolean insideRight = (x - SIZE/2 < paddle.x + paddle.WIDTH/2);
     boolean insideTop = (y + SIZE/2 > paddle.y - paddle.HEIGHT/2);
     boolean insideBottom = (y - SIZE/2 < paddle.y + paddle.HEIGHT/2);
-    
+
     // Check if the ball overlaps with the paddle
     if (insideLeft && insideRight && insideTop && insideBottom) {
       //PADDLE REVERSE MODE
@@ -246,7 +235,6 @@ class Ball {
     }
   }
   
-
   // display()
   //
   // Draw the ball at its position
@@ -254,44 +242,49 @@ class Ball {
   void display() {
     // Set up the appearance of the ball (no stroke, a fill, and rectMode as CENTER)
     noStroke();
-    
+
     fill(ballColor);
     rectMode(CENTER);
-    
+
     textFont(font);
-    
+
     //set scores 
-    fill(255,red);
-     textSize(tSize);
-     textAlign(CENTER, CENTER);
-      text(p1_score,width/2, height/2 - 50);
-      
-      fill(255,blue);
-      textAlign(CENTER, CENTER);
-      text(p2_score,width/2, height/2 - 50);
+    fill(255, red);
+    textSize(tSize);
+    textAlign(CENTER, CENTER);
+    text(p1_score, width/2, height/2 - 50);
+
+    fill(255, blue);
+    textAlign(CENTER, CENTER);
+    text(p2_score, width/2, height/2 - 50);
 
     fill(255);
-    
-    //if(!activSP && !spOver){ //changes colors to indicate who can use the special key and if they can do it ///////CHECAAAAA
-    //  ballColor = color(#D8344A);
-    //}
-    
-    //if(activSP && !spOver){
-    //  ballColor = color(#50B1FF);
-    //}
+
+    if (!activSP && !spOver) { //changes color of the main ball to indicate who can use the special key and if they can do it 
+      fill(#D8344A);
+    }
+
+    if (activSP && !spOver) {
+      fill(#50B1FF);
+    }
+
+    if (spOver) {
+      fill(255);
+    }
+
     // Draw the ball
     rect(x, y, SIZE, SIZE);
   }
-  
-  void displayREVERSE(){
-    if (reverse){
-     textSize(50);
-     textAlign(CENTER, CENTER);
-     fill(255, 20);
-     text("REVERSE", width/2, 40);
-     fill(#FFB846);
-    }else{
-     fill(#9B46FF); 
+
+  void displayREVERSE() {
+    if (reverse) {
+      textSize(50);
+      textAlign(CENTER, CENTER);
+      fill(255, 20);
+      text("REVERSE", width/2, 40);
+      fill(#FFB846);
+    } else {
+      fill(#9B46FF);
     }
     ellipse(x, y, SIZE, SIZE);
   }
