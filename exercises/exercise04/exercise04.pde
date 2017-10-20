@@ -50,6 +50,7 @@ void draw() {
     // Update the griddies
     griddies[i].update();
     
+    //griddieaters eat the griddies when they collide
     if (griddies[i].x == griddiEaters[i].x && griddies[i].x == griddiEaters[i].x){
             griddiEaters[i].eatGriddie();
             griddies[i].beEaten();
