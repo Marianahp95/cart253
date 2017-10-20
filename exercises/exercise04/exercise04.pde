@@ -10,6 +10,7 @@
 int gridSize = 20;
 // An array storing all the griddies
 Griddie[] griddies = new Griddie[100];
+GriddiEater[] griddiEaters = new GriddiEater[100];
 
 // setup()
 //
@@ -18,7 +19,7 @@ Griddie[] griddies = new Griddie[100];
 void setup() {
   // Set up the window size and framerate (lower so we can watch easier)
   size(640, 480);
-  frameRate(10);
+  frameRate(15);
 
   // QUESTION: What does this for loop do?
   // it goes through the whole array generating the griddies in random places within the grid and it makes them the size of one square in the grid 
@@ -26,6 +27,13 @@ void setup() {
     int x = floor(random(0, width/gridSize));
     int y = floor(random(0, height/gridSize));
     griddies[i] = new Griddie(x * gridSize, y * gridSize, gridSize);
+  }
+  
+  //Griddieaters random generation
+   for (int i = 0; i < griddiEaters.length; i++) {
+    int x = floor(random(0, width/(gridSize)));
+    int y = floor(random(0, height/(gridSize)));
+    griddiEaters[i] = new GriddiEater(x * (gridSize), y * (gridSize), (gridSize));
   }
 }
 
@@ -41,19 +49,43 @@ void draw() {
 
     // Update the griddies
     griddies[i].update();
+    
+    if (griddies[i].x == griddiEaters[i].x && griddies[i].x == griddiEaters[i].x){
+            griddiEaters[i].eatGriddie();
+            griddies[i].beEaten();
+    }
 
     // Now go through all the griddies a second time...
     for (int j = 0; j < griddies.length; j++) {
-      // QUESTION: What is this if-statement for?
       // this is veryfing that the griddie is not giving itself life, without it the griddies never die because the collide is activated when they are colliding with themselves
       if (j != i) {
-        // QUESTION: What does this line check?
         // it checks whether the griddies are coming in contact with other griddies and calling the collide function
         griddies[i].collide(griddies[j]);
+        
       }
     }
     
     // Display the griddies
     griddies[i].display();
+  }
+  
+  for (int i = 0; i < griddiEaters.length; i++) {
+
+    // Update the griddies
+    griddiEaters[i].update();
+
+    // Now go through all the griddies a second time...
+    for (int j = 0; j < griddiEaters.length; j++) {
+      // QUESTION: What is this if-statement for?
+      // this is veryfing that the griddie is not giving itself life, without it the griddies never die because the collide is activated when they are colliding with themselves
+      if (j != i) {
+        // QUESTION: What does this line check?
+        // it checks whether the griddies are coming in contact with other griddies and calling the collide function
+        griddiEaters[i].collide(griddiEaters[j]);
+      }
+    }
+    
+    // Display the griddies
+    griddiEaters[i].display();
   }
 }

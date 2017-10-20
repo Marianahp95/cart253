@@ -1,29 +1,24 @@
+// GriddiEaters
 
-// Griddie
-//
-// A class defining the behaviour of a single Griddie
-// which can move randomly in the window (within the grid),
-// loses energy per move, and gains energy from overlapping
-// with another Griddie.
-
-class Griddie {
+//The natural predators and superiors of the griddies
+class GriddiEater {
   // Limits for energy level and gains/losses
-  int maxEnergy = 255;
-  int moveEnergy = -1;
-  int collideEnergy = 10;
+  int maxEnergy = 300;
+  int moveEnergy = -2;
+  int collideEnergy = 20;
   
   // Position, size, energy, and fill color
   int x;
   int y;
   int size;
   int energy;
-  color fill = color(#C758FF);
-
+  color fill = color(#58E4FF);
+  
   // Griddie(tempX, tempY, tempSize)
   //
   // Set up the Griddie with the specified location and size
   // Initialise energy to the maximum
-  Griddie(int tempX, int tempY, int tempSize) {
+  GriddiEater(int tempX, int tempY, int tempSize) {
     x = tempX;
     y = tempY;
     size = tempSize;
@@ -35,20 +30,17 @@ class Griddie {
   // Move the Griddie and update its energy levels
   void update() {
     
-    // QUESTION: What is this if-statement for?
-    // it checks if the griddie ran out of energy (died) and returns a true or false
+    // it checks if the griddieater ran out of energy (died) and returns a true or false
     if (energy == 0) {
       return;
     }
     
-    // QUESTION: How does the Griddie movement updating work?
-    // the griddie can randomly move in -1, 0 or 1 in x and y direction within the spots in the grid (that' why it's multiplied by size)
-    int xMoveType = floor(random(-1,2));
-    int yMoveType = floor(random(-1,2));
+    // the griddie can randomly move in -2, -1, 0, 1 or 2 in x and y direction within the spots in the grid (that' why it's multiplied by size)
+    int xMoveType = floor(random(-2,3));
+    int yMoveType = floor(random(-2,3));
     x += size * xMoveType;
     y += size * yMoveType;
     
-    // QUESTION: What are these if statements doing?
     // they are checking whether the griddies are trying to escape the grid (position outside the screen) and preventing them from doing so by
     // either adding or substracting from the width and height, keeping them inside the grid.
     if (x < 0) {
@@ -77,15 +69,13 @@ class Griddie {
   // Checks for collision with the other Griddie
   // and updates energy level
   
-  void collide(Griddie other) {
-    // QUESTION: What is this if-statement for?
-    //it checks if either of the griddies are dead and collide doesn't get executed if they are
+  void collide(GriddiEater other) {
+    // checks if either of the griddies are dead and collide doesn't get executed if they are
     if (energy == 0 || other.energy == 0) {
       return;
     }
     
-    // QUESTION: What does this if-statement check?
-    //it checks if the griddie is intersecting with another griddie, if it is then the collide energy is added to it
+    // checks if the griddie is intersecting with another griddie, if it is then the collide energy is added to it
     if (x == other.x && y == other.y) {
       // Increase this Griddie's energy
       energy += collideEnergy;
@@ -98,15 +88,16 @@ class Griddie {
   //
   // Draw the Griddie on the screen as a rectangle
   void display() {
-    // QUESTION: What does this fill line do?
     // it shows the amount of energy the griddies have by displaying their health in their color opacity 
     fill(fill, energy); 
     noStroke();
     rect(x, y, size, size);
   }
   
-   void beEaten (){
+  void eatGriddie (){
     // Increase this Griddie's energy
-      energy -= collideEnergy;
+      energy += collideEnergy;
   }
+  
+  
 }
