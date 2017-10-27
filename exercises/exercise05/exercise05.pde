@@ -4,46 +4,36 @@
 
 //declaring variables for the photo that will be drawn and the size of the squares
 PImage photo;
+PImage pine;
 float size = 15;
 float t = 0;
 int x;
-int hill = 255;
+int hill = 230;
 int hillCount;
 
-boolean timerRunning = false;//taken from the timer code in the slides
+boolean timerRunning = true;//taken from the timer code in the slides
 int startTime = 0;
+boolean timeUp = false;
 
 
 void setup() {
   size(1080, 720);
   background(0);
-  photo = loadImage("sunset.jpg"); //loading image
+  photo = loadImage("sunset.jpg"); //loading images
+  pine = loadImage("pino.png"); //loading image
   imageMode(CENTER); //draws the image form the center
   noStroke();
-  surface.setResizable(true);
 }
 
 void draw() { 
- 
-  int x1 = int(random(photo.width)); //chooses a random x value of the photo
-  int y1 = int(random(photo.height)); //chooses a random y value of the photo
   
-  color pix = photo.get(x1, y1); //out of the random coordinates we get the color of a specific pixel of the photo
-  
-  fill(pix, 128);
-  ellipse(x1, y1, size, size);//the ellipses get drawn every frame
-  
-  
-  //float r = random(0,1);//randomizes the creation of the ellipses
-  //ellipse(x,r*height,5,5);//took this code from the class slides
-  
- fill(hill);
+ fill(hill, 200);
  float n = noise(t); //randomizes the creation of the ellipses using noise, making them "graph"
  ellipseMode(CORNER);
  ellipse(x,n*height,30,700);//took this code from the class slides
-  if(x > width && hillCount < 2){
+  if(x > width && hillCount < 1){
     x = 0;
-    hill = hill - 25;
+    hill = hill + 25;
     hillCount++;
     
   }else{
@@ -52,22 +42,37 @@ void draw() {
   
   t += 0.01;
   
-  if (hillCount == 2){
+  if (timerRunning){
+     int x1 = int(random(photo.width)); //chooses a random x value of the photo
+  int y1 = int(random(photo.height)); //chooses a random y value of the photo
+  
+  color pix = photo.get(x1, y1); //out of the random coordinates we get the color of a specific pixel of the photo
+  
+  fill(pix, 128);
+  ellipse(x1, y1, size, size);//the ellipses get drawn every frame
+   
+  }
     
+ if(timeUp){
+    trees();
+    timeUp = false;
   }
   
     if (timerRunning) {
     int timeElapsed = (millis() - startTime)/1000;
+      if(timeElapsed == 20){
+        timerRunning = false;
+        timeUp = true;
+      }
     println(timeElapsed);
   }
 }
   
-
-void keyPressed() {
-  if (key == 's') {
-    startTime = millis();
-    timerRunning = true;
-  } else if (key == 'x') {
-    timerRunning = false;
-  }
+void trees(){
+  for (int i = 0; i < 20; i++) {
+      int x1 = int(random(width)); //chooses a random x value of the photo
+      int y1 = int(random(360,720)); //chooses a random y value of the photo
+      image(pine, x1, y1,61,120);//the ellipses get drawn every frame  
+      println(i);
+    }
 }
