@@ -17,7 +17,7 @@ PVector brightestPixel = new PVector(-1, -1);
 Bouncer[] bouncers = new Bouncer[10];
 
 //Variables
-int size = 40;
+int size = 20;
 //count of collides
 int colCount;
 
@@ -69,13 +69,11 @@ void draw() {
     }
   }
   // For now we just draw a totally rad color changing ellipse at the brightest pixel
-  //stroke(#000000);
+ 
   fill(random(floor(255)), random(floor(255)), random(floor(255)));
-  //noFill();
-  //fill(255,0,0);
   ellipse(brightestPixel.x, brightestPixel.y, size, size);
 
-  if (colCount == 9) {
+  if (colCount >= 10) {
     loadPixels();
     for ( int x = 1; x < video.width; x++ ) { //code taken from the slides
       for ( int y = 0; y < video.height; y++ ) {
