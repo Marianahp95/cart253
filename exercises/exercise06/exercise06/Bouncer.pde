@@ -21,12 +21,15 @@ class Bouncer {
 
   // The default fill colour of the Bouncer
   color defaultColor;
+  
+  //boolean to check id the bouncer has changed
+  boolean change;
 
   // Bouncer(tempX,tempY,tempVX,tempVY,tempSize,tempDefaultColor)
   //
   // Creates a Bouncer with the provided values by remembering them.
 
-  Bouncer(float tempX, float tempY, float tempVX, float tempVY, float tempSize, color tempDefaultColor) {
+  Bouncer(float tempX, float tempY, float tempVX, float tempVY, float tempSize, color tempDefaultColor, boolean tempChange) {
     x = tempX;
     y = tempY;
     vx = tempVX;
@@ -34,6 +37,7 @@ class Bouncer {
     size = tempSize;
     defaultColor = tempDefaultColor;
     fillColor = defaultColor;
+    change = tempChange;
   }
 
   // update()
@@ -71,7 +75,9 @@ class Bouncer {
   }
 
   void collide(){
-    fillColor = color(255,0,0);
+    fillColor = color(random(floor(255)),random(floor(255)),random(floor(255)));
+    colCount ++;
+    change = true;
   }
 
   // display()

@@ -18,6 +18,8 @@ Bouncer[] bouncers = new Bouncer[10];
 
 //Variables
 int size = 40;
+//count of collides
+int colCount;
 
 // setup()
 //
@@ -30,7 +32,7 @@ void setup() {
   // array adding new objects to it (Bouncers in this case)
   for (int i = 0; i < bouncers.length; i++) {
     // Each Bouncer just starts with random values 
-    bouncers[i] = new Bouncer(random(0, width), random(0, height), random(-10, 10), random(-10, 10), random(20, 50), color(random(255)));
+    bouncers[i] = new Bouncer(random(0, width), random(0, height), random(-10, 10), random(-10, 10), random(20, 50), color(random(255)), false);
   }
 
   // Start up the webcam
@@ -61,17 +63,37 @@ void draw() {
   }
 
   for (int i = 0; i < bouncers.length; i++) {
-    if (bouncers[i].x > (brightestPixel.x - size/2) && bouncers[i].x < (brightestPixel.x + size/2) && bouncers[i].y > (brightestPixel.y - size/2) && bouncers[i].y < (brightestPixel.y + size/2)) {
-      println("choque");
+    if (bouncers[i].change == false && bouncers[i].x > (brightestPixel.x - size/2) && bouncers[i].x < (brightestPixel.x + size/2) && bouncers[i].y > (brightestPixel.y - size/2) && bouncers[i].y < (brightestPixel.y + size/2)) {
+      println(colCount);
       bouncers[i].collide();
     }
   }
-  // For now we just draw a crappy ellipse at the brightest pixel
+  // For now we just draw a totally rad color changing ellipse at the brightest pixel
   //stroke(#000000);
-  fill(random(floor(255)),random(floor(255)),random(floor(255)));
+  fill(random(floor(255)), random(floor(255)), random(floor(255)));
   //noFill();
   //fill(255,0,0);
   ellipse(brightestPixel.x, brightestPixel.y, size, size);
+
+  if (colCount == 9) {
+    loadPixels();
+    for ( int x = 1; x < video.width; x++ ) { //code taken from the slides
+      for ( int y = 0; y < video.height; y++ ) {
+        float threshold = 8;
+        int loc = x + y*video.width;
+        color pix = video.pixels[loc];
+        int leftLoc = (x-1) + y*video.width;
+        color leftPix = video.pixels[leftLoc];
+        float diff = abs(brightness(pix) -  brightness(leftPix));
+        if ( diff > threshold ) {
+          pixels[loc] = color(random(floor(255)), random(floor(255)), random(floor(255)));
+        } else {
+          pixels[loc] = color(0);
+        }
+      }
+    }
+    updatePixels(); // If we changed the pixels array we need to update it
+  }
 }
 
 // handleVideoInput
