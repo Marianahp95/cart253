@@ -1,4 +1,15 @@
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
+
 import processing.sound.*;
+
+Minim minim;
+AudioInput mic; // The class that lets us get at the microphone
+
 // Somewhere to store our 5 wave frequencies
 int[] frequencies = new int[5];
 // The number of frames per beat of music
@@ -22,11 +33,17 @@ int framesPerDrumbeat = 20;
 color backColor = 0;
 
 //cube rotation variables
-int rotX;
-int rotY;
+float rotX;
+float rotY;
+
+float beat;
 
 void setup() {
   size(1080,720, P3D);
+  
+  minim = new Minim(this);
+  // turn on the mic 
+  mic = minim.getLineIn();
   
   // Go through the array loading frequencies into it
   for (int i = 0; i < frequencies.length; i++) {
@@ -46,21 +63,24 @@ void setup() {
 void draw() {
   background(backColor);
   
+  float level = mic.mix.level();
+  rotX =+ level*5;
+  println(level);
+  
   pushMatrix();
-  rotY ++;
-  rotX --;
-  translate(width/2, height/2, 0); 
-  rotateX(rotX);
-  rotateY(rotY);
-  stroke (backColor - 255);
-  noFill();
-  box(300);
+    translate(width/2, height/2, 0); 
+    rotateX(rotX);
+    rotateY(rotY = rotY + beat);
+    stroke (backColor - 255);
+    noFill();
+    box(300 +(level*1000));
   popMatrix();
+  
   // Use modulo to check if this frame is a multiple of the beat count
   if (frameCount % framesPerBeat == 0) {
     // Pick a random index in the array
     int randomIndex = floor(random(0, frequencies.length));
-    
+    beat = randomIndex;
     // Set the new frequency
     saw.freq(frequencies[randomIndex]);
   }
