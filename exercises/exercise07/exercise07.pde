@@ -8,7 +8,8 @@ import ddf.minim.ugens.*;
 import processing.sound.*;
 
 Minim minim;
-AudioInput mic; // The class that lets us get at the microphone
+AudioInput mic; // The class that lets us use the microphone
+AudioPlayer turret; //class that lets us play audio
 
 // Somewhere to store our 5 wave frequencies
 int[] frequencies = new int[5];
@@ -45,6 +46,9 @@ void setup() {
   // turn on the mic 
   mic = minim.getLineIn();
   
+   turret = minim.loadFile("sounds/Portal 2 - Turret Sounds.mp3", 1024);
+  turret.loop();
+  
   // Go through the array loading frequencies into it
   for (int i = 0; i < frequencies.length; i++) {
     // We can use the i variable to set up equidistant frequencies
@@ -67,11 +71,19 @@ void draw() {
   rotX =+ level*5;
   println(level);
   
+   for(int i = 0; i < turret.bufferSize() - 1; i++) //base code taken from the minim reference examples
+  {
+    float x1 = map( i, 0, turret.bufferSize(), 0, width );
+    float x2 = map( i+1, 0, turret.bufferSize(), 0, width );
+    line( x1, 50 + turret.left.get(i)*50, x2, 50 + turret.left.get(i+1)*80 );
+    line( x1, height - 50 + turret.right.get(i)*50, x2, height-50 + turret.right.get(i+1)*80 );
+  }
+  
   pushMatrix();
     translate(width/2, height/2, 0); 
     rotateX(rotX);
     rotateY(rotY = rotY + beat);
-    stroke (backColor - 255);
+    stroke (255);
     noFill();
     box(300 +(level*1000));
   popMatrix();
@@ -90,7 +102,7 @@ void draw() {
     // or a snare and play them if so
      if (drumPattern.charAt(currentDrumBeat) == 'o') {
         kick.play();
-        backColor = 255;
+        backColor = color(random(floor(255)), random(floor(255)), random(floor(255)));
      }
      else if (drumPattern.charAt(currentDrumBeat) == 'x') {
        snare.play();
