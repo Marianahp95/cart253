@@ -74,18 +74,18 @@ class Bouncer {
     y = constrain(y, size/2, height-size/2);
   }
 
-  void crash(Bouncer other){
-     if ((x + size/2) > (other.x - size/2) && (x - size/2) < (other.x + size/2) && (y + size/2) > (other.y - size/2) && (y - size/2) < (other.y + size/2)) {
-      vx = -vx;
+  void crash(Bouncer other){ //checks if the location of one bouncer is the same as another bouncer
+     if (!change && (x + size/2) > (other.x - size/2) && (x - size/2) < (other.x + size/2) && (y + size/2) > (other.y - size/2) && (y - size/2) < (other.y + size/2)) {
+      vx = -vx; //makes them both go the opposite direction 
       vy = -vy;
      }
   }
   
   
-  void collide(){
+  void collide(){//when they come in contact with the brightest pixel they change to a random color
     fillColor = color(random(floor(255)),random(floor(255)),random(floor(255)));
-    colCount ++;
-    change = true;
+    colCount ++;//one piont is added to the counter
+    change = true;//flag that indicates if it came in contact with the brightest pixel
   }
 
   // display()

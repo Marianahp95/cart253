@@ -60,17 +60,16 @@ void draw() {
   for (int i = 0; i < bouncers.length; i++) {
     bouncers[i].update();
     bouncers[i].display();
-    for (int j = 0; j < bouncers.length; j++) {
-       if (j != i) {
-         bouncers[i].crash(bouncers[j]);
+    for (int j = 0; j < bouncers.length; j++) { //runs through the array a second time to see if the bouncers come in contact with each other
+       if (j != i) { //makes sure they're not crashing with themselves
+         bouncers[i].crash(bouncers[j]); //calls the crash function
        }
       }
   }
 
   for (int i = 0; i < bouncers.length; i++) {
     if (bouncers[i].change == false && bouncers[i].x > (brightestPixel.x - size/2) && bouncers[i].x < (brightestPixel.x + size/2) && bouncers[i].y > (brightestPixel.y - size/2) && bouncers[i].y < (brightestPixel.y + size/2)) {
-      println(colCount);
-      bouncers[i].collide();
+      bouncers[i].collide(); //if they come in contact with the brightest pixel ellipse the collide function is called
     }
   }
   // For now we just draw a totally rad color changing ellipse at the brightest pixel
@@ -78,7 +77,7 @@ void draw() {
   fill(random(floor(255)), random(floor(255)), random(floor(255)));
   ellipse(brightestPixel.x, brightestPixel.y, size, size);
 
-  if (colCount >= 10) {
+  if (colCount >= 10) { //when all of the bouncers have changed color the threshold mode activates
     loadPixels();
     for ( int x = 1; x < video.width; x++ ) { //code taken from the slides
       for ( int y = 0; y < video.height; y++ ) {
