@@ -79,6 +79,12 @@ void draw() {
     line( x1, height - 50 + turret.right.get(i)*50, x2, height-50 + turret.right.get(i+1)*80 );
   }
   
+  
+   fill(0);
+   noStroke();
+   ellipse(width/4,height/2,level*10000,level*10000);
+   ellipse(width - width/4,height/2,level*10000,level*10000);
+  
   pushMatrix();
     translate(width/2, height/2, 0); 
     rotateX(rotX);
