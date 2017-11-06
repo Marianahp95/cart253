@@ -32,7 +32,7 @@ void setup() {
   // array adding new objects to it (Bouncers in this case)
   for (int i = 0; i < bouncers.length; i++) {
     // Each Bouncer just starts with random values 
-    bouncers[i] = new Bouncer(random(0, width), random(0, height), random(-10, 10), random(-10, 10), random(20, 50), color(random(255)), false);
+    bouncers[i] = new Bouncer(random(0, width), random(0, height), random(-5, 5), random(-5, 5), random(20, 50), color(random(255)), false);
   }
 
   // Start up the webcam
@@ -60,6 +60,11 @@ void draw() {
   for (int i = 0; i < bouncers.length; i++) {
     bouncers[i].update();
     bouncers[i].display();
+    for (int j = 0; j < bouncers.length; j++) {
+       if (j != i) {
+         bouncers[i].crash(bouncers[j]);
+       }
+      }
   }
 
   for (int i = 0; i < bouncers.length; i++) {
@@ -77,14 +82,14 @@ void draw() {
     loadPixels();
     for ( int x = 1; x < video.width; x++ ) { //code taken from the slides
       for ( int y = 0; y < video.height; y++ ) {
-        float threshold = 8;
+        float threshold = 6;
         int loc = x + y*video.width;
         color pix = video.pixels[loc];
         int leftLoc = (x-1) + y*video.width;
         color leftPix = video.pixels[leftLoc];
         float diff = abs(brightness(pix) -  brightness(leftPix));
         if ( diff > threshold ) {
-          pixels[loc] = color(random(floor(255)), random(floor(255)), random(floor(255)));
+          pixels[loc] = color(random(floor(255)), random(floor(255)), random(floor(255)));//highlights are a random color
         } else {
           pixels[loc] = color(0);
         }

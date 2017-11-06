@@ -74,6 +74,14 @@ class Bouncer {
     y = constrain(y, size/2, height-size/2);
   }
 
+  void crash(Bouncer other){
+     if ((x + size/2) > (other.x - size/2) && (x - size/2) < (other.x + size/2) && (y + size/2) > (other.y - size/2) && (y - size/2) < (other.y + size/2)) {
+      vx = -vx;
+      vy = -vy;
+     }
+  }
+  
+  
   void collide(){
     fillColor = color(random(floor(255)),random(floor(255)),random(floor(255)));
     colCount ++;
