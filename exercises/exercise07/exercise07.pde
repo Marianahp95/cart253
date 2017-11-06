@@ -21,6 +21,10 @@ int framesPerDrumbeat = 20;
 //background color
 color backColor = 0;
 
+//cube rotation variables
+int rotX;
+int rotY;
+
 void setup() {
   size(1080,720, P3D);
   
@@ -41,10 +45,22 @@ void setup() {
 }
 void draw() {
   background(backColor);
+  
+  pushMatrix();
+  rotY ++;
+  rotX --;
+  translate(width/2, height/2, 0); 
+  rotateX(rotX);
+  rotateY(rotY);
+  stroke (backColor - 255);
+  noFill();
+  box(300);
+  popMatrix();
   // Use modulo to check if this frame is a multiple of the beat count
   if (frameCount % framesPerBeat == 0) {
     // Pick a random index in the array
     int randomIndex = floor(random(0, frequencies.length));
+    
     // Set the new frequency
     saw.freq(frequencies[randomIndex]);
   }
