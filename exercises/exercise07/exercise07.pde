@@ -17,7 +17,13 @@ String drumPattern = "o-x-oox-o-xoooxx";
 int currentDrumBeat = 0;
 // Tempo of the drums
 int framesPerDrumbeat = 20;
+
+//background color
+color backColor = 0;
+
 void setup() {
+  size(1080,720, P3D);
+  
   // Go through the array loading frequencies into it
   for (int i = 0; i < frequencies.length; i++) {
     // We can use the i variable to set up equidistant frequencies
@@ -34,6 +40,7 @@ void setup() {
   snare = new SoundFile(this,"sounds/snare.wav");
 }
 void draw() {
+  background(backColor);
   // Use modulo to check if this frame is a multiple of the beat count
   if (frameCount % framesPerBeat == 0) {
     // Pick a random index in the array
@@ -47,11 +54,14 @@ void draw() {
     // or a snare and play them if so
      if (drumPattern.charAt(currentDrumBeat) == 'o') {
         kick.play();
+        backColor = 255;
      }
      else if (drumPattern.charAt(currentDrumBeat) == 'x') {
        snare.play();
+       backColor = 0;
      }
      // Increment the drum beat (and loop back to the start if finished)
      currentDrumBeat = (currentDrumBeat + 1) % drumPattern.length();
   }
+ 
 }
