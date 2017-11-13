@@ -17,6 +17,8 @@ class Level_1 {
 // The current location of the avatar
   float x = width/2;
   float y = height/2;
+  
+  int mSize = 35;
 
   // The constructor does nothing
   Level_1() {
@@ -45,6 +47,9 @@ class Level_1 {
     x += cos(theta) * speed;
     y += sin(theta) * speed;
     
+    x = constrain(x, mSize/2, width - mSize/2);
+    y = constrain(y, mSize/2, height - mSize/2);
+    
   }
 
   void drawAvatar() {
@@ -55,14 +60,13 @@ class Level_1 {
     // Rotate by theta
     rotate(theta);
     // Draw an ellipse for the body)
-    ellipse(0, 0, 50, 50);
+    ellipse(0, 0, mSize, mSize);
     // Draw a line so we can see which way it's facing)
     line(0, 0, 25, 0);
     // If you pushMatrix() you gotta popMatrix()
     popMatrix();
     
   }
-
   
 
   void keyPressed() {
