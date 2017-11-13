@@ -10,6 +10,7 @@ enum State {
     LEVEL_1, 
     //LEVEL_2,
     //LEVEL_3
+    GAMEOVER
 }
 
 State state;
@@ -20,6 +21,7 @@ Intro intro;
 Level_1 level_1;
 //Level_2 level_2;
 //Level_3 level_3;
+GameOver gameover;
 
 
 void setup() {
@@ -32,6 +34,7 @@ void setup() {
   level_1 = new Level_1();
   //level_2 = new Level_2();
   //level_3 = new Level_3();
+  gameover = new GameOver();
 
   // We start our state in the title screen
   state = State.TITLE;
@@ -63,13 +66,23 @@ void draw() {
 //first level
   case LEVEL_1:
     level_1.update();
-    if (level_1.returnToMenu) {
-      state = State.TITLE;
+    if (level_1.finished) {
+      state = State.GAMEOVER;
       //state = State.LEVEL_2;
-      level_1.reset();
+      //level_1.reset();
     }
     break;
     //ADD HERE FUTURE LEVELS
+    
+    case GAMEOVER:
+    gameover.update();
+    if (gameover.finished) {
+      state = State.TITLE;
+      //state = State.LEVEL_2;
+      //level_1.reset();
+      title.reset();
+    }
+    break;
   }
 }
 
@@ -88,6 +101,10 @@ void keyPressed() {
 
   case LEVEL_1:
     level_1.keyPressed();
+    break;
+    
+  case GAMEOVER:
+    gameover.keyPressed();
     break;
   }
 }
@@ -110,5 +127,8 @@ void keyReleased() {
     level_1.keyReleased();
     break;
 
+  case GAMEOVER:
+    gameover.keyReleased();
+    break;
   }
 }
