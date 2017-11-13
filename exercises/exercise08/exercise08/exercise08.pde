@@ -38,17 +38,13 @@ void setup() {
 }
 
 void draw() {
-  // A "switch" statement is like an "if" statement with different
-  // syntax. Notice how we use "break;" after the instructions for
-  // each state are finished.
+  //I'm using a switch statement to change between the different states of the game
   switch (state) {
     // If our state is NONE, we do nothing
   case NONE:
     break;
 
-  // If our state is TITLE we update the title object
-  // which displays it, and then we check whether the title
-  // screen is finished and if so we go to the menu state
+//title screen
   case TITLE:
     title.update();
     if (title.finished) {
@@ -56,6 +52,7 @@ void draw() {
     }
     break;
     
+//story intro
   case INTRO:
     intro.update();
     if (intro.finished) {
@@ -63,6 +60,7 @@ void draw() {
     }
     break;
 
+//first level
   case LEVEL_1:
     level_1.update();
     if (level_1.returnToMenu) {
@@ -72,5 +70,45 @@ void draw() {
     }
     break;
     //ADD HERE FUTURE LEVELS
+  }
+}
+
+void keyPressed() {
+  switch (state) {
+  case NONE:
+    break;
+
+  case TITLE:
+    title.keyPressed();
+    break;
+
+  case INTRO:
+    intro.keyPressed();
+    break;
+
+  case LEVEL_1:
+    level_1.keyPressed();
+    break;
+  }
+}
+
+void keyReleased() {
+  switch (state) {
+  case NONE:
+    break;
+
+  case TITLE:
+    title.keyReleased();
+    break;
+
+  case INTRO:
+    intro.keyReleased();
+    break;
+
+
+  case LEVEL_1:
+    level_1.keyReleased();
+    break;
+
   }
 }
