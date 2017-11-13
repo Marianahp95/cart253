@@ -26,7 +26,7 @@ GameOver gameover;
 
 void setup() {
   // Set the size
-  size(640, 480);
+  size(1080, 720);
 
   // Create the different states
   title = new Title();
@@ -38,6 +38,7 @@ void setup() {
 
   // We start our state in the title screen
   state = State.TITLE;
+  
 }
 
 void draw() {

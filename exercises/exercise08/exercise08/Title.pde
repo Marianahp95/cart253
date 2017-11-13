@@ -9,6 +9,9 @@ class Title {
 
   // A variable to track whether the title screen is finished
   boolean finished = false;
+  
+  // Variable to make the title fade in
+  int fadeInTitle;
 
   // The constructor does nothing
   Title() {
@@ -30,7 +33,8 @@ class Title {
     background(0);
     textAlign(CENTER, CENTER);
     textSize(64);
-    fill(255);
+    fadeInTitle ++;
+    fill(255,fadeInTitle);
     text("GHOST STORIES", width/2, height/2);
 
     textSize(32);
