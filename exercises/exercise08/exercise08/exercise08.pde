@@ -75,6 +75,8 @@ void draw() {
     break;
     //ADD HERE FUTURE LEVELS
     
+    
+    //if the player loses
     case GAMEOVER:
     gameover.update();
     if (gameover.finished) {
