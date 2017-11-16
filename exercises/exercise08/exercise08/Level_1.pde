@@ -3,6 +3,7 @@
 class Level_1 {
 
   Avatar marvis;
+  Human human_1;
   
   Obstacle[] tombs = new Obstacle[20];
   
@@ -28,6 +29,8 @@ class Level_1 {
         tombs[i] = new Obstacle(x, y , 40, 20);
     }
     
+    human_1 = new Human();
+    
   }
 
   void update() {
@@ -35,6 +38,7 @@ class Level_1 {
     marvis.update();
     marvis.drawAvatar();
     checkObstColl();
+    human_1.update();
     for (int i = 0; i < tombs.length; i++) {
       tombs[i].drawObstacle();
     }
