@@ -23,7 +23,7 @@ class Obstacle{
   void drawObstacle(){
     
     pushStyle();
-      //rectMode(CENTER);
+      rectMode(CORNER);
       fill(255);
       noStroke();
       rect(x,y,sizeX,sizeY);

@@ -4,7 +4,7 @@ class Level_1 {
 
   Avatar marvis;
   
-  Obstacle[] tombs = new Obstacle[10];
+  Obstacle[] tombs = new Obstacle[20];
   
   // A variable to track whether the title screen is finished
   boolean finished = false;
@@ -44,8 +44,12 @@ class Level_1 {
   
   void checkObstColl(){
     for (int i = 0; i < tombs.length; i++) {
-      if ( tombs[i].x <= marvis.x + (marvis.mSize/2) && tombs[i].x + tombs[i].sizeX >= marvis.x - (marvis.mSize/2) && tombs[i].y <= marvis.y + (marvis.mSize/2) && tombs[i].y + tombs[i].sizeY >= marvis.y - (marvis.mSize/2)){
+      if ( (marvis.x + marvis.mSize/2) > tombs[i].x && (marvis.x - marvis.mSize/2) < tombs[i].x + tombs[i].sizeX && 
+      (marvis.y + marvis.mSize/2) > tombs[i].y && (marvis.y - marvis.mSize/2) < tombs[i].y + tombs[i].sizeY){
         println("collide");
+        marvis.speed = 0;
+        //marvis.x = marvis.x - marvis.mSize/2;
+        //marvis.y = marvis.y - marvis.mSize/2;
       }else{
         println("nope");
       }
