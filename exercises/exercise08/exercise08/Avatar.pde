@@ -53,6 +53,8 @@ class Avatar{
     y = height/2;
   }
   
+ 
+  
   void keyPressed(){
     if (keyCode == UP) {
         speed = 5;
