@@ -15,6 +15,8 @@ class Avatar{
   
   int mSize = 35;
   
+  int redness = 255;
+  
   Avatar(int _x, int _y) {
     x = _x;
     y = _y;
@@ -39,10 +41,14 @@ class Avatar{
     translate(x, y);
     // Rotate by theta
     rotate(theta);
+    //Color of the avatar
+    pushStyle(); 
+      fill(redness,255,255);
     // Draw an ellipse for the body)
     ellipse(0, 0, mSize, mSize);
     // Draw a line so we can see which way it's facing)
     line(0, 0, 25, 0);
+    popStyle();
     // If you pushMatrix() you gotta popMatrix()
     popMatrix();
     

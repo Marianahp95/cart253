@@ -14,7 +14,6 @@ class Level_1 {
   int startY = height/2;
   
   
-  
   Level_1() {
    
     //we create the avatar 
@@ -38,6 +37,7 @@ class Level_1 {
     marvis.update();
     marvis.drawAvatar();
     checkObstColl();
+    checkHumanColl();
     human_1.update();
     for (int i = 0; i < tombs.length; i++) {
       tombs[i].drawObstacle();
@@ -56,6 +56,19 @@ class Level_1 {
         //marvis.y = marvis.y - marvis.mSize/2;
       }else{
         println("nope");
+      }
+    }
+  }
+  
+  void checkHumanColl(){
+    for (int i = 0; i < tombs.length; i++) {
+      if ( (marvis.x + marvis.mSize/2) > human_1.x && (marvis.x - marvis.mSize/2) < human_1.x + human_1.size && 
+      (marvis.y + marvis.mSize/2) > human_1.y && (marvis.y - marvis.mSize/2) < human_1.y + human_1.size){
+        println("HE CAUGHT YOU");
+        marvis.redness = 0;
+      }else{
+        println("nope");
+        marvis.redness = 255;
       }
     }
   }
