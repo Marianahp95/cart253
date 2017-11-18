@@ -43,7 +43,7 @@ class Avatar{
     rotate(theta);
     //Color of the avatar
     pushStyle(); 
-      fill(redness,255,255);
+      fill(255,redness,redness);
     // Draw an ellipse for the body)
     ellipse(0, 0, mSize, mSize);
     // Draw a line so we can see which way it's facing)

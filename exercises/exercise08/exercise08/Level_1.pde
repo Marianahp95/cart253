@@ -13,6 +13,8 @@ class Level_1 {
   int startX = width/2;
   int startY = height/2;
   
+  int lives = 3;
+  boolean humanHit = false;
   
   Level_1() {
    
@@ -42,8 +44,7 @@ class Level_1 {
     for (int i = 0; i < tombs.length; i++) {
       tombs[i].drawObstacle();
     }
-    //updateAvatar();
-    //drawAvatar();
+    text(lives,100,100);
   }
   
   void checkObstColl(){
@@ -61,15 +62,22 @@ class Level_1 {
   }
   
   void checkHumanColl(){
-    for (int i = 0; i < tombs.length; i++) {
+   
       if ( (marvis.x + marvis.mSize/2) > human_1.x && (marvis.x - marvis.mSize/2) < human_1.x + human_1.size && 
-      (marvis.y + marvis.mSize/2) > human_1.y && (marvis.y - marvis.mSize/2) < human_1.y + human_1.size){
+      (marvis.y + marvis.mSize/2) > human_1.y && (marvis.y - marvis.mSize/2) < human_1.y + human_1.size && humanHit == false){
         println("HE CAUGHT YOU");
+        humanHit = true;
         marvis.redness = 0;
+        looseLife();
       }else{
         println("nope");
         marvis.redness = 255;
       }
+  }
+  
+  void looseLife(){
+    if (lives > 0 ){
+      lives = lives - 1; 
     }
   }
   
@@ -81,4 +89,6 @@ class Level_1 {
   void keyReleased() {
      marvis.keyReleased();
   }
+  
+  
 }
