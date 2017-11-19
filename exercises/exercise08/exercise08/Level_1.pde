@@ -6,6 +6,7 @@ class Level_1 {
   Human human_1;
   
   Obstacle[] tombs = new Obstacle[20];//create an array of obstacles
+  Item[] clues = new Item[3];//create an array of items
   
   // A variable to track whether the level is finished
   boolean finished = false;
@@ -26,12 +27,18 @@ class Level_1 {
     marvis = new Avatar(startX, startY);
     
     for (int i = 0; i < tombs.length; i++) {//for loop draws the obstacles 
-      int x = floor(random(i, width)); //randomize the positions
-      int y = floor(random(i, height));
+      int x = floor(random(0, width)); //randomize the positions
+      int y = floor(random(0, height));
       //for (int j = 0; j < tombs.length; j++){
       //  int x = (j)*20;
       //  int y = (i)*70;
         tombs[i] = new Obstacle(x, y , 40, 20); //create the obstacles
+    }
+    
+    for (int i = 0; i < clues.length; i++) {//for loop draws the items 
+      int x = floor(random( width)); //randomize the positions
+      int y = floor(random( height));
+        clues[i] = new Item(x, y , 20, 20, color(#5AF3F7)); //create the items
     }
     
     human_1 = new Human(); //create the human
@@ -45,9 +52,14 @@ class Level_1 {
     marvis.drawAvatar();
     checkObstColl();
     checkHumanColl();
+    collectItem();
     human_1.update();
     for (int i = 0; i < tombs.length; i++) {
       tombs[i].drawObstacle();
+    }
+    
+    for (int i = 0; i < clues.length; i++) {
+      clues[i].drawItem();
     }
     text(lives,100,100); //temporary lives display 
   }
@@ -63,7 +75,7 @@ class Level_1 {
         
       }else{
         
-        println("nope");
+        //println("nope");
       }
     }
   }
@@ -79,6 +91,22 @@ class Level_1 {
       }else{
         marvis.redness = 255;
       }
+  }
+  
+  void collectItem(){
+    for (int i = 0; i < clues.length; i++) {
+      
+      if ( (marvis.x + marvis.mSize/2) > clues[i].x && (marvis.x - marvis.mSize/2) < clues[i].x + clues[i].sizeX && 
+      (marvis.y + marvis.mSize/2) > clues[i].y && (marvis.y - marvis.mSize/2) < clues[i].y + clues[i].sizeY){
+        
+        println("PICKUP");
+        clues[i].pickUp();
+        
+      }else{
+        
+        //println("nope");
+      }
+    }
   }
   
   void looseLife(){ 
