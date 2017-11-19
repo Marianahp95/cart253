@@ -1,6 +1,20 @@
 //Ghost Stories
 //by Mariana Hernández
 
+//*******TO DO LIST*******
+
+//- COMMENT EVERYTHING NICELY
+//- FIX RESET
+//- COLLISION OF HUMAN WITH OBSTACLES
+//- POSITIONING OF THE OBSTACLES 
+//- MAKE THE REDNESS GROW WITH EACH HIT
+//- ITEM COLLECTION 
+//- CLUE POP UP
+//- AFTER ITEM COLLECTION OPEN DOOR TO NEXT LEVEL
+//- HEALTH WITH WEBCAM
+//- ADD SOUNDS
+//- ADD GRAPHICS
+
 
 //I'm using enum to track the state the program is in.
 enum State {
@@ -44,7 +58,7 @@ void setup() {
 void draw() {
   //I'm using a switch statement to change between the different states of the game
   switch (state) {
-    // If our state is NONE, we do nothing
+    // If the state is NONE, we do nothing
   case NONE:
     break;
 
@@ -89,6 +103,7 @@ void draw() {
   }
 }
 
+//calling the key pressed and key released for every different state
 void keyPressed() {
   switch (state) {
   case NONE:

@@ -8,19 +8,11 @@ class GameOver {
   GameOver() {
   }
 
-  // update()
-  //
-  // Just displays the title
-
   void update() {
     display();
   }
 
-  // display()
-  //
-  // Displays the title of the game and the basic instructions
-  // to press any key
-  void display() {
+  void display() { //display the GAME OVER screen 
     background(0);
     textAlign(CENTER, CENTER);
     textSize(64);
@@ -31,18 +23,11 @@ class GameOver {
     text("Press any key to continue", width/2, 3*height/4);
   }
   
-  // keyPressed()
-  //
-  // Called by the main program when the title is active.
-  // Sets finished to true immediately (since it's any key)
 
-  void keyPressed() {
+  void keyPressed() { //key pressed takes us back to the title screen
     finished = true;
   }
 
-  // keyReleased()
-  //
-  // Does nothing.
   
   void keyReleased() {
   }

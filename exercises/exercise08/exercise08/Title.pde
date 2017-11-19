@@ -17,23 +17,17 @@ class Title {
   Title() {
   }
 
-  // update()
-  //
-  // Just displays the title
-
   void update() {
     display();
   }
 
-  // display()
-  //
-  // Displays the title of the game and the basic instructions
-  // to press any key
+ 
+  // Displays the title of the game and the basic instructions to press any key
   void display() {
     background(0);
     textAlign(CENTER, CENTER);
     textSize(64);
-    fadeInTitle ++;
+    fadeInTitle ++;//fades in the title
     fill(255,fadeInTitle);
     text("GHOST STORIES", width/2, height/2);
 
@@ -41,23 +35,18 @@ class Title {
     text("Press any key to continue", width/2, 3*height/4);
   }
   
-  // keyPressed()
-  //
+  
   // Called by the main program when the title is active.
   // Sets finished to true immediately (since it's any key)
 
   void keyPressed() {
     finished = true;
   }
-
-  // keyReleased()
-  //
-  // Does nothing.
   
   void keyReleased() {
   }
   
-  void reset(){
+  void reset(){ //NEEDS FIXING
     finished = false;
   }
 }

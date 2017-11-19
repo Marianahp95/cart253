@@ -1,9 +1,10 @@
 class Obstacle{
 
-// The current location of the avatar
+// The location of the obstacles
   float x;
   float y;
   
+// The size of the obstacles
   int sizeX;
   int sizeY;
   
@@ -22,7 +23,7 @@ class Obstacle{
   
   void drawObstacle(){
     
-    pushStyle();
+    pushStyle(); //draw the obstacle
       rectMode(CORNER);
       fill(255);
       noStroke();
