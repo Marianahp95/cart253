@@ -35,6 +35,8 @@ class Item{
  
   void pickUp() {
     itemCol = color(#F75A79);
-    fill(itemCol);
+    x = width +30;//moving the picked up clue out of the way
+    y = height + 30;
+    
   }
 }

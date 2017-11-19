@@ -7,7 +7,7 @@
 //- COLLISION OF HUMAN WITH OBSTACLES
 //- POSITIONING OF THE OBSTACLES 
 //- MAKE THE REDNESS GROW WITH EACH HIT
-//- ITEM COLLECTION *
+
 //- CLUE POP UP * 
 //- AFTER ITEM COLLECTION OPEN DOOR TO NEXT LEVEL
 //- HEALTH WITH WEBCAM
@@ -23,7 +23,8 @@ enum State {
     LEVEL_1, 
     //LEVEL_2,
     //LEVEL_3
-    GAMEOVER
+    GAMEOVER,
+    GAMEWON
 }
 
 State state;
@@ -35,6 +36,7 @@ Level_1 level_1;
 //Level_2 level_2;
 //Level_3 level_3;
 GameOver gameover;
+GameWon gamewon;
 
 
 void setup() {
@@ -48,6 +50,7 @@ void setup() {
   //level_2 = new Level_2();
   //level_3 = new Level_3();
   gameover = new GameOver();
+  gamewon = new GameWon();
 
   // We start our state in the title screen
   state = State.TITLE;
@@ -80,13 +83,29 @@ void draw() {
 //first level
   case LEVEL_1:
     level_1.update();
+    if (level_1.won){
+      state = State.GAMEWON;
+    }
+    
     if (level_1.finished) {
       state = State.GAMEOVER;
       //state = State.LEVEL_2;
       //level_1.reset();
     }
+    
+    
     break;
     //ADD HERE FUTURE LEVELS
+    
+     case GAMEWON:
+    gamewon.update();
+    if (gamewon.finished) {
+      state = State.TITLE;
+      //state = State.LEVEL_2;
+      //level_1.reset();
+      title.reset();
+    }
+    break;
     
     
     //if the player loses
@@ -123,6 +142,10 @@ void keyPressed() {
   case GAMEOVER:
     gameover.keyPressed();
     break;
+    
+  case GAMEWON:
+    gamewon.keyPressed();
+    break;
   }
 }
 
@@ -146,6 +169,10 @@ void keyReleased() {
 
   case GAMEOVER:
     gameover.keyReleased();
+    break;
+    
+  case GAMEWON:
+    gamewon.keyReleased();
     break;
   }
 }

@@ -11,12 +11,25 @@ class Level_1 {
   // A variable to track whether the level is finished
   boolean finished = false;
   
+  boolean won = false;
+  
+  boolean doorOpen = false;
+  
   //starting position of the avatar
   int startX = width/2;
   int startY = height/2;
   
   //number of starting lives
   int lives = 3;
+  
+  //clue index
+  int clueId;
+  
+  float doorX = random(floor(width)); //random position of the door
+  float doorY = random(floor(height));
+  
+  int doorSizeX = 40;
+  int doorSizeY = 60;
   
   //variable to track the enemy collision
   boolean humanHit = false;
@@ -54,6 +67,8 @@ class Level_1 {
     checkHumanColl();
     collectItem();
     human_1.update();
+    doorCheck();
+    
     for (int i = 0; i < tombs.length; i++) {
       tombs[i].drawObstacle();
     }
@@ -61,7 +76,15 @@ class Level_1 {
     for (int i = 0; i < clues.length; i++) {
       clues[i].drawItem();
     }
-    text(lives,100,100); //temporary lives display 
+    text(lives + " " + clueId,100,100); //temporary lives display 
+    
+     if (clueId == 3){
+       doorOpen = true;
+      pushStyle();
+        fill(#98F75A);
+        rect(doorX,doorY, doorSizeX, doorSizeY);
+      popStyle();
+    }
   }
   
   void checkObstColl(){ //ghost vs obstacle collision check
@@ -101,6 +124,7 @@ class Level_1 {
         
         println("PICKUP");
         clues[i].pickUp();
+        clueId ++;
         
       }else{
         
@@ -116,6 +140,13 @@ class Level_1 {
     if (lives == 0){ //No lives = game over
         finished = true;
     }
+  }
+  
+  void doorCheck(){
+     if ( (marvis.x + marvis.mSize/2) > doorX && (marvis.x - marvis.mSize/2) < doorX +  doorSizeX && 
+      (marvis.y + marvis.mSize/2) > doorY && (marvis.y - marvis.mSize/2) < doorY + doorSizeY && doorOpen == true){
+        won = true;
+      }
   }
   
   void keyPressed() {
