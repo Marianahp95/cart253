@@ -25,11 +25,13 @@ class Level_1 {
   //clue index
   int clueId;
   
-  float doorX = random(floor(width)); //random position of the door
-  float doorY = random(floor(height));
-  
-  int doorSizeX = 40;
+  //size of the door
+   int doorSizeX = 40;
   int doorSizeY = 60;
+  
+  //random door position
+  float doorX = random(floor(width - doorSizeX)); //random position of the door
+  float doorY = random(floor(height - doorSizeY));
   
   //variable to track the enemy collision
   boolean humanHit = false;
@@ -96,9 +98,6 @@ class Level_1 {
         println("collide");
         marvis.speed = 0; //stops when it hits the obstacles but can pass through them
         
-      }else{
-        
-        //println("nope");
       }
     }
   }
@@ -126,9 +125,6 @@ class Level_1 {
         clues[i].pickUp();
         clueId ++;
         
-      }else{
-        
-        //println("nope");
       }
     }
   }
