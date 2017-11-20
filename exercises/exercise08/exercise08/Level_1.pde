@@ -38,6 +38,10 @@ class Level_1 {
 
   //var to keep track of the clue pausing
   boolean paused = false;
+  
+  //var to keep track of the brightsest pixel activation
+  boolean extraLifeOn = true;
+
 
   //var to store the location of the brightest pixel
   PVector brightestPixel = new PVector(-1, -1);
@@ -157,10 +161,12 @@ class Level_1 {
 
   void brightestPixelDisplay(){
     
-  
-    //fill(random(floor(255)), random(floor(255)), random(floor(255)));
-    ellipse(brightestPixel.x, brightestPixel.y, 20, 20);
-    
+    if (extraLifeOn){
+     pushStyle();
+      fill(random(floor(255)), random(floor(255)), random(floor(255)));
+      ellipse(brightestPixel.x, brightestPixel.y, 20, 20);
+     popStyle();
+    }
    
   }
 
@@ -199,6 +205,12 @@ class Level_1 {
         paused = true;
       }
     }
+    
+    if ( (marvis.x + marvis.mSize/2) > brightestPixel.x - 10 && (marvis.x - marvis.mSize/2) < brightestPixel.x + 10 && 
+        (marvis.y + marvis.mSize/2) > brightestPixel.y - 10 && (marvis.y - marvis.mSize/2) < brightestPixel.y + 10) {
+          extraLifeOn = false;
+          lives = lives +1;
+     }
   }
 
   void displayClues() {
@@ -233,6 +245,7 @@ class Level_1 {
     marvis.speed = 0;
     marvis.x = width/2;
     marvis.y = height/2;
+    extraLifeOn = true;
 
     //draw the clues again
     for (int i = 0; i < clues.length; i++) {//for loop draws the items 

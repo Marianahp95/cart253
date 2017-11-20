@@ -7,7 +7,7 @@ import processing.video.*;
 
 //- COLLISION OF HUMAN WITH OBSTACLES
 
-//- HEALTH WITH WEBCAM *
+//- HEALTH WITH WEBCAM * -- ellipse disapears but lifes are still added 
 //- ADD SOUNDS
 //- ADD GRAPHICS
 
