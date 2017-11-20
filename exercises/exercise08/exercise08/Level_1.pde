@@ -36,12 +36,14 @@ class Level_1 {
   //variable to track the enemy collision
   boolean humanHit = false;
 
+  //var to keep track of the clue pausing
   boolean paused = false;
 
+  //var to store the location of the brightest pixel
+  PVector brightestPixel = new PVector(-1, -1);
 
 
   Level_1() {
-
 
     //we create the avatar 
     marvis = new Avatar(startX, startY);
@@ -77,7 +79,7 @@ class Level_1 {
       imageMode(CENTER);
       image(video, width/2, height/2);
     popStyle();  
-     
+      brightestPixelDisplay();
 
     if (!paused) { //if the game isn't paused by the clues run everything normally
 
@@ -88,6 +90,7 @@ class Level_1 {
       human_1.update();
       doorCheck();
       marvis.drawAvatar();
+     
 
       for (int i = 0; i < tombs.length; i++) {
         tombs[i].drawObstacle();
@@ -121,9 +124,45 @@ class Level_1 {
     }
     // If we're here, there IS a frame to look at so read it in
     video.read();
+    
+    // Start with a very low "record" for the brightest pixel
+  // so that we'll definitely find something better
+  float brightnessRecord = 0;
+  // loadPixels();
+
+  // Go through every pixel in the grid of pixels made by this
+  // frame of video
+  for (int x = 0; x < video.width; x++) {
+    for (int y = 0; y < video.height; y++) {
+      // Calculate the location in the 1D pixels array
+      int loc = x + y * video.width;
+      // Get the color of the pixel we're looking at
+      color pixelColor = video.pixels[loc];
+      // Get the brightness of the pixel we're looking at
+      float pixelBrightness = brightness(pixelColor);
+      // Check if this pixel is the brighest we've seen so far
+      if (pixelBrightness > brightnessRecord) {
+        // If it is, change the record value
+        brightnessRecord = pixelBrightness;
+        // Remember where this pixel is in the the grid of pixels
+        // (and therefore on the screen) by setting the PVector
+        // brightestPixel's x and y properties.
+        brightestPixel.x = x;
+        brightestPixel.y = y;
+      }
+    }
   }
+ }
 
 
+  void brightestPixelDisplay(){
+    
+  
+    //fill(random(floor(255)), random(floor(255)), random(floor(255)));
+    ellipse(brightestPixel.x, brightestPixel.y, 20, 20);
+    
+   
+  }
 
   void checkObstColl() { //ghost vs obstacle collision check
     for (int i = 0; i < tombs.length; i++) {
