@@ -77,18 +77,9 @@ class Level_1 {
       collectItem();
       human_1.update();
       doorCheck();
-    }
-    
-   
-    marvis.drawAvatar();
-    
-    
-    //webcam
-    handleVideoInput();
-    //image(video, 0, 0);
-    
-    
-    for (int i = 0; i < tombs.length; i++) {
+      marvis.drawAvatar();
+      
+        for (int i = 0; i < tombs.length; i++) {
       tombs[i].drawObstacle();
     }
     
@@ -105,6 +96,21 @@ class Level_1 {
         rect(doorX,doorY, doorSizeX, doorSizeY);
       popStyle();
     }
+    
+    } else {
+      displayClues();
+    }
+    
+   
+    
+    
+    
+    //webcam
+    handleVideoInput();
+    //image(video, 0, 0);
+    
+    
+  
   }
   
   void handleVideoInput() {
@@ -152,11 +158,34 @@ class Level_1 {
         println("PICKUP");
         clues[i].pickUp();
         clueId ++;
-        //paused = true;
+        paused = true;
         
       }
     }
   }
+  
+  void displayClues(){
+    
+    pushStyle();
+    fill(255,0,0);
+    textSize(70);
+    if (clueId == 1 ) {
+      background(0);
+      text("CLUE 1", width/2, height/2);
+    }
+    
+    if (clueId == 2 ) {
+      background(0);
+      text("CLUE 2", width/2, height/2);
+    }
+    
+    if (clueId == 3 ) {
+      background(0);
+      text("CLUE 3", width/2, height/2);
+    }
+    popStyle();
+  }
+  
   void reset(){//we reset the variables so that the game can be played again
     finished = false;
     won = false;
@@ -195,6 +224,9 @@ class Level_1 {
   void keyPressed() {
     humanHit = false;//prevents the human from taking more than 1 life at a time, when the ghost moves the human can take life again
      marvis.keyPressed();
+     if (key == 'x'){
+       paused = false;
+    }
   }
 
   
