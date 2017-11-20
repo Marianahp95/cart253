@@ -106,7 +106,7 @@ void draw() {
     if (gamewon.finished) {
       state = State.TITLE;
       //state = State.LEVEL_2;
-      //level_1.reset();
+      level_1.reset();
       title.reset();
     }
     break;

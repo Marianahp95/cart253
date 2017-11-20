@@ -20,12 +20,15 @@ class GameOver {
     text("GAME OVER", width/2, height/2);
 
     textSize(32);
-    text("Press any key to continue", width/2, 3*height/4);
+    text("Press X to restart", width/2, 3*height/4);
   }
   
 
   void keyPressed() { //key pressed takes us back to the title screen
-    finished = true;
+    if (key == 'x'){
+      finished = true;
+    }
+    
   }
 
   

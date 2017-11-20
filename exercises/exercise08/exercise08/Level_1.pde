@@ -95,6 +95,7 @@ class Level_1 {
     for (int i = 0; i < clues.length; i++) {
       clues[i].drawItem();
     }
+    
     text(lives + " " + clueId,100,100); //temporary lives display 
     
      if (clueId == 3){
@@ -151,13 +152,25 @@ class Level_1 {
         println("PICKUP");
         clues[i].pickUp();
         clueId ++;
-        paused = true;
+        //paused = true;
         
       }
     }
   }
-  void reset(){
+  void reset(){//we reset the variables so that the game can be played again
     finished = false;
+    won = false;
+    doorOpen = false;
+    lives = 3;
+    clueId = 0;
+    marvis.redness = 255;
+    
+    //draw the clues again
+    for (int i = 0; i < clues.length; i++) {//for loop draws the items 
+      int x = floor(random( width)); //randomize the positions
+      int y = floor(random( height));
+        clues[i] = new Item(x, y , 20, 20, color(#5AF3F7)); //create the items
+    }
   }
   
   void looseLife(){ 
@@ -177,7 +190,7 @@ class Level_1 {
   }
   
   void keyPressed() {
-    humanHit = false;//prevents the human from taking more than I life at a time, when the ghost moves the human can take life again
+    humanHit = false;//prevents the human from taking more than 1 life at a time, when the ghost moves the human can take life again
      marvis.keyPressed();
   }
 
