@@ -5,7 +5,7 @@ class Level_1 {
   Avatar marvis; //declare the object variables
   Human human_1;
   
-  Obstacle[] tombs = new Obstacle[20];//create an array of obstacles
+  Obstacle[] tombs = new Obstacle[30];//create an array of obstacles
   Item[] clues = new Item[3];//create an array of items
   
   // A variable to track whether the level is finished
@@ -43,7 +43,8 @@ class Level_1 {
     
     for (int i = 0; i < tombs.length; i++) {//for loop draws the obstacles 
       int x = floor(random(0, width)); //randomize the positions
-      int y = floor(random(0, height));
+      //int y = floor(random(0, height));
+      int y = i*38;
       //for (int j = 0; j < tombs.length; j++){
       //  int x = (j)*20;
       //  int y = (i)*70;
@@ -108,10 +109,8 @@ class Level_1 {
       (marvis.y + marvis.mSize/2) > human_1.y && (marvis.y - marvis.mSize/2) < human_1.y + human_1.size && humanHit == false){
         println("HE CAUGHT YOU");
         humanHit = true;
-        marvis.redness = 0;//color changing ------NEEDS FIXING
+        marvis.redness = marvis.redness - 100;//color changing 
         looseLife();
-      }else{
-        marvis.redness = 255;
       }
   }
   
