@@ -7,7 +7,6 @@ import processing.video.*;
 
 //- COLLISION OF HUMAN WITH OBSTACLES
 
-//- CLUE POP UP * 
 //- HEALTH WITH WEBCAM *
 //- ADD SOUNDS
 //- ADD GRAPHICS
