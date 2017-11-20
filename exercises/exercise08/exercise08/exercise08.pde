@@ -1,3 +1,5 @@
+import processing.video.*;
+
 //Ghost Stories
 //by Mariana Hernández
 
@@ -7,11 +9,9 @@
 //- COLLISION OF HUMAN WITH OBSTACLES
 
 //- CLUE POP UP * 
-//- AFTER ITEM COLLECTION OPEN DOOR TO NEXT LEVEL
-//- HEALTH WITH WEBCAM
+//- HEALTH WITH WEBCAM ****
 //- ADD SOUNDS
 //- ADD GRAPHICS
-
 
 //I'm using enum to track the state the program is in.
 enum State {
@@ -35,12 +35,18 @@ Level_1 level_1;
 //Level_3 level_3;
 GameOver gameover;
 GameWon gamewon;
+// The capture object for reading from the webcam
+  Capture video;
 
 
 void setup() {
   // Set the size
   size(1080, 720);
 
+    // Start up the webcam
+    video = new Capture(this, 640, 480, 30);
+    video.start();
+    
   // Create the different states
   title = new Title();
   intro = new Intro();
@@ -112,7 +118,7 @@ void draw() {
     if (gameover.finished) {
       state = State.TITLE;
       //state = State.LEVEL_2;
-      //level_1.reset();
+      level_1.reset();
       title.reset();
     }
     break;

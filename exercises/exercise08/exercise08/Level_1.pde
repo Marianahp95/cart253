@@ -36,8 +36,13 @@ class Level_1 {
   //variable to track the enemy collision
   boolean humanHit = false;
   
+  boolean paused = false;
+  
+
+  
   Level_1() {
    
+
     //we create the avatar 
     marvis = new Avatar(startX, startY);
     
@@ -57,6 +62,7 @@ class Level_1 {
         clues[i] = new Item(x, y , 20, 20, color(#5AF3F7)); //create the items
     }
     
+    
     human_1 = new Human(); //create the human
     
   }
@@ -64,13 +70,23 @@ class Level_1 {
   void update() {//calls the update, draw and collide functions
     
     background(0);
-    marvis.update();
+    if (!paused) {
+      marvis.update();
+      checkObstColl();
+      checkHumanColl();
+      collectItem();
+      human_1.update();
+      doorCheck();
+    }
+    
+   
     marvis.drawAvatar();
-    checkObstColl();
-    checkHumanColl();
-    collectItem();
-    human_1.update();
-    doorCheck();
+    
+    
+    //webcam
+    handleVideoInput();
+    //image(video, 0, 0);
+    
     
     for (int i = 0; i < tombs.length; i++) {
       tombs[i].drawObstacle();
@@ -89,6 +105,18 @@ class Level_1 {
       popStyle();
     }
   }
+  
+  void handleVideoInput() {
+  // Check if there's a frame to look at
+  if (!video.available()) {
+    // If not, then just return, nothing to do
+    return;
+  }
+    // If we're here, there IS a frame to look at so read it in
+    video.read();
+  }
+
+  
   
   void checkObstColl(){ //ghost vs obstacle collision check
     for (int i = 0; i < tombs.length; i++) {
@@ -123,9 +151,13 @@ class Level_1 {
         println("PICKUP");
         clues[i].pickUp();
         clueId ++;
+        paused = true;
         
       }
     }
+  }
+  void reset(){
+    finished = false;
   }
   
   void looseLife(){ 
