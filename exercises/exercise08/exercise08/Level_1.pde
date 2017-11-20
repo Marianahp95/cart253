@@ -164,6 +164,9 @@ class Level_1 {
     lives = 3;
     clueId = 0;
     marvis.redness = 255;
+    marvis.speed = 0;
+    marvis.x = width/2;
+    marvis.y = height/2;
     
     //draw the clues again
     for (int i = 0; i < clues.length; i++) {//for loop draws the items 

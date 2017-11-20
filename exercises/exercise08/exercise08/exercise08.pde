@@ -5,11 +5,10 @@ import processing.video.*;
 
 //*******TO DO LIST*******
 
-//- FIX RESET *
 //- COLLISION OF HUMAN WITH OBSTACLES
 
 //- CLUE POP UP * 
-//- HEALTH WITH WEBCAM ****
+//- HEALTH WITH WEBCAM *
 //- ADD SOUNDS
 //- ADD GRAPHICS
 
@@ -108,6 +107,7 @@ void draw() {
       //state = State.LEVEL_2;
       level_1.reset();
       title.reset();
+      gamewon.finished = false;
     }
     break;
     
@@ -120,6 +120,7 @@ void draw() {
       //state = State.LEVEL_2;
       level_1.reset();
       title.reset();
+      gameover.finished = false;
     }
     break;
   }
