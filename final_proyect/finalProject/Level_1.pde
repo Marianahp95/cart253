@@ -46,11 +46,16 @@ class Level_1 {
   //var to store the location of the brightest pixel
   PVector brightestPixel = new PVector(-1, -1);
 
+  //image variables
+  PImage grave;
 
   Level_1() {
 
     //we create the avatar 
     marvis = new Avatar(startX, startY);
+    
+      //LOAD ALL IMAGES
+     grave = loadImage("data/Grave.png");
 
     for (int i = 0; i < tombs.length; i++) {//for loop draws the obstacles 
       int x = floor(random(0, width)); //randomize the positions
@@ -59,7 +64,7 @@ class Level_1 {
       //for (int j = 0; j < tombs.length; j++){
       //  int x = (j)*20;
       //  int y = (i)*70;
-      tombs[i] = new Obstacle(x, y, 40, 20); //create the obstacles
+      tombs[i] = new Obstacle(x, y, 75, 69, grave); //create the obstacles
     }
 
     for (int i = 0; i < clues.length; i++) {//for loop draws the items 
@@ -70,11 +75,12 @@ class Level_1 {
 
 
     human_1 = new Human(); //create the human
+  
   }
 
   void update() {//calls the update, draw and collide functions
 
-   background(0);
+   background(#578600);
    
     //webcam
     handleVideoInput();

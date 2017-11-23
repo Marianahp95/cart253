@@ -12,7 +12,7 @@ import processing.video.*;
 //- ADD GRAPHICS
   // - Ghost
 //- MAKE GRAPHICS
-  //- Grave sprites
+  
   //- Background
   //- Door sprite
   //- Clue Sprites
@@ -49,6 +49,8 @@ GameWon gamewon;
 void setup() {
   // Set the size
   size(1080, 720);
+  
+ 
 
     // Start up the webcam
     video = new Capture(this, 640, 480, 30);
