@@ -17,9 +17,12 @@ class Avatar{
   
   int redness = 255; //variable that controls the redness of the avatar as it becomes more evil
   
-  Avatar(int _x, int _y) {
+  PImage marvisSp;
+  
+  Avatar(int _x, int _y, PImage _marvisSp) {
     x = _x;
     y = _y;
+    marvisSp = _marvisSp;
   }
   
    void update() {
@@ -47,7 +50,8 @@ class Avatar{
       pushStyle(); 
         fill(255,redness,redness);
         // Draw an ellipse for the body)
-        ellipse(0, 0, mSize, mSize);
+        image(marvisSp,-30,-30,72,57);
+        //ellipse(0, 0, mSize, mSize);
         // Draw a line so we can see which way it's facing)
         line(0, 0, 25, 0);
       popStyle();

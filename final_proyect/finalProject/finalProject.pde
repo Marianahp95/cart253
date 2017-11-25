@@ -11,14 +11,17 @@ import processing.video.*;
 //- ADD SOUNDS
 //- ADD GRAPHICS
   // - Ghost
+  //- Door sprite
+  //- human sprite
+  
 //- MAKE GRAPHICS
   
   //- Background
-  //- Door sprite
+  
   //- Clue Sprites
   //- Instructions
   //- Title screen 
-  //- human sprite
+  
 
 //I'm using enum to track the state the program is in.
 enum State {

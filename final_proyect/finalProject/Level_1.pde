@@ -47,15 +47,17 @@ class Level_1 {
   PVector brightestPixel = new PVector(-1, -1);
 
   //image variables
+  PImage marvis_Sp;
   PImage grave;
 
   Level_1() {
-
-    //we create the avatar 
-    marvis = new Avatar(startX, startY);
-    
-      //LOAD ALL IMAGES
+ //LOAD ALL IMAGES
+ 
+     marvis_Sp = loadImage("sprite_Marvis0.png");
      grave = loadImage("data/Grave.png");
+    
+    //we create the avatar 
+    marvis = new Avatar(startX, startY, marvis_Sp);
 
     for (int i = 0; i < tombs.length; i++) {//for loop draws the obstacles 
       int x = floor(random(0, width)); //randomize the positions
