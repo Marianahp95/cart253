@@ -50,10 +50,10 @@ class Avatar{
       pushStyle(); 
         fill(255,redness,redness);
         // Draw an ellipse for the body)
-        image(marvisSp,-30,-30,72,57);
+        image(marvisSp,-25,-22,51,43);
         //ellipse(0, 0, mSize, mSize);
         // Draw a line so we can see which way it's facing)
-        line(0, 0, 25, 0);
+        //line(0, 0, 25, 0);
       popStyle();
     popMatrix();
     
