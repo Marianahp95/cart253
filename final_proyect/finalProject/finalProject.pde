@@ -10,11 +10,8 @@ import processing.video.*;
 
 //- ADD SOUNDS
 //- ADD GRAPHICS
-  //- human sprite
-  
 //- MAKE GRAPHICS
 
-  //- Clue Sprites
   //- Instructions
   //- Title screen 
   //- Game over screen
