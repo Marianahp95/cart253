@@ -26,7 +26,7 @@ class Level_1 {
   int clueId;
 
   //size of the door
-  int doorSizeX = 40;
+  int doorSizeX = 60;
   int doorSizeY = 60;
 
   //random door position
@@ -50,7 +50,10 @@ class Level_1 {
   PImage fondo;
 
   PImage grave;
+  PImage[] door_Sp = new PImage[4];
   
+   int rate = 5;
+   int currentFrame;
   
 
   Level_1() {
@@ -58,6 +61,9 @@ class Level_1 {
  
      grave = loadImage("data/Grave.png");
      fondo = loadImage("fondoMarvis.png");
+     for ( int i = 0; i< door_Sp.length; i++ ) {
+        door_Sp[i] = loadImage( "sprite_door" + i + ".png" );   
+      }
     
     //we create the avatar 
     marvis = new Avatar(startX, startY, 5);
@@ -117,11 +123,17 @@ class Level_1 {
 
       text(lives + " " + clueId, 100, 100); //temporary lives display 
 
+      // Check if this frame is one where we should update the animation
+    if (frameCount % rate == 0) {
+      // Change the frame (loop if we reach the end of the array)
+      currentFrame = (currentFrame+1) % door_Sp.length;
+    }
+
       if (clueId == 3) {
         doorOpen = true;
         pushStyle();
           fill(#98F75A);
-          rect(doorX, doorY, doorSizeX, doorSizeY);
+          image(door_Sp[currentFrame],doorX, doorY, doorSizeX, doorSizeY);
         popStyle();
       }
     } else {
