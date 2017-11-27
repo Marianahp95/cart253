@@ -1,11 +1,22 @@
 class Human{
   
-  //randomizes time for the noise function
-float tx = random(0,100);
-float ty = random(0,100);
+  float theta = PI/2;
+
+// The number of pixels the avatar moves per frame
+// Default is zero (it's not moving)
+float speed = 1;
+// The number of radians the avatar turns per frame
+// Default is zero (it's not turning)
+float turnSpeed = 0;
+  
+//  //randomizes time for the noise function
+//float tx = random(0,100);
+//float ty = random(0,100);
+
+float t = 0;
 
 //size of the human
-int size = 35;
+int size = 90;
 
 //variables for the position
 float x;
@@ -18,7 +29,7 @@ int currentFrame;
   
   Human() {
     for ( int i = 0; i< human_Sp.length; i++ ) { //load the door images into an array to animate it
-        human_Sp[i] = loadImage( "sprite_door" + i + ".png" );   
+        human_Sp[i] = loadImage( "sprite_human" + i + ".png" );   
       }
   }
   
@@ -27,20 +38,59 @@ int currentFrame;
   }
   
   void update(){ //makes it move organically using noise() (TAKEN FROM CLASS SLIDES)
-    x = width * noise(tx);
-    y = height * noise(ty);
+    //x = width * noise(tx);
+    //y = height * noise(ty);
     
-      if (frameCount % rate == 0) { 
+    // Set the avatar's rotation based on the current turning speed
+    theta = TWO_PI * noise(t);
+  
+  // Set the avatar's position based on adding the two components
+  // of its speed based on its angle, using trigonometry!
+    x += cos(theta) * speed;
+    y += sin(theta) * speed;
+  
+    t += 0.05;
+    
+    if (frameCount % rate == 0) { 
       // Change the frame (loop if we reach the end of the array)
       currentFrame = (currentFrame+1) % human_Sp.length;
     }
     
-    //draw the ellipse
-    image(human_Sp[currentFrame],x,y,size,size);
+  pushMatrix();
+    // Translate to the location (so we rotate the avatar around its centre)
+    translate(x, y);
+    // Rotate by theta
+    rotate(theta);
+    // Draw an ellipse for the body)
+    imageMode(CENTER);
+   image(human_Sp[currentFrame],0,0,size,size);
+    // Draw a line so we can see which way it's facing)
+    line(0, 0, 25, 0);
+    // If you pushMatrix() you gotta popMatrix()
+  popMatrix();
+  
+   if (x > width){
+    x = 0;
+   }
+   
+   if (y > height){
+    y = 0;
+   }
+   
+   if (x < 0){
+    x = width;
+   }
+   
+   if (y < 0){
+    y = height;
+   }
     
-    //makes the values used in noise() change over time
-    tx += 0.006;
-    ty += 0.006;
+    //draw the ellipse
+    
+    
+    ////makes the values used in noise() change over time
+    //tx += 0.006;
+    //ty += 0.006;
     
    
   }
