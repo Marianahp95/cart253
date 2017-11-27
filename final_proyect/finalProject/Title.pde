@@ -12,27 +12,41 @@ class Title {
   
   // Variable to make the title fade in
   int fadeInTitle;
+  
+  PImage titleScreen;
+  
+  PImage[] MarvisFront_Sp = new PImage[4];
+  PImage[] ClueBig = new PImage[4];
+
+  int rate = 10;
+  int currentFrame;
 
   // The constructor does nothing
   Title() {
+    titleScreen = loadImage("TitleScreen.png");
+     for ( int i = 0; i< MarvisFront_Sp.length; i++ ) { //load the door images into an array to animate it
+        MarvisFront_Sp[i] = loadImage( "sprite_MarvisFront" + i + ".png" );   
+      }
   }
 
   void update() {
     display();
+     
+    if (frameCount % rate == 0) { 
+      // Change the frame (loop if we reach the end of the array)
+      currentFrame = (currentFrame+1) % MarvisFront_Sp.length;
+    }
   }
 
  
   // Displays the title of the game and the basic instructions to press any key
   void display() {
     background(0);
-    textAlign(CENTER, CENTER);
-    textSize(64);
+    tint(255, fadeInTitle); 
+    image(titleScreen,0,0);
+    image(MarvisFront_Sp[currentFrame],0,170,540,540);
+    
     fadeInTitle ++;//fades in the title
-    fill(255,fadeInTitle);
-    text("GHOST STORIES", width/2, height/2);
-
-    textSize(32);
-    text("Press any key to continue", width/2, 3*height/4);
   }
   
   
