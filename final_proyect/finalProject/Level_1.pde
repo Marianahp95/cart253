@@ -81,7 +81,7 @@ class Level_1 {
     for (int i = 0; i < clues.length; i++) {//for loop draws the items 
       int x = floor(random( width)); //randomize the positions
       int y = floor(random( height));
-      clues[i] = new Item(x, y, 20, 20, color(#5AF3F7)); //create the items
+      clues[i] = new Item(x, y, 30, 30, color(#5AF3F7)); //create the items
     }
 
 
@@ -121,7 +121,7 @@ class Level_1 {
         clues[i].drawItem();
       }
 
-      text(lives + " " + clueId, 100, 100); //temporary lives display 
+      //text(lives + " " + clueId, 100, 100); //temporary lives display 
 
       //door animation
       // Check if this frame is one where we should update the animation
@@ -277,7 +277,7 @@ class Level_1 {
     for (int i = 0; i < clues.length; i++) {//for loop draws the items 
       int x = floor(random( width)); //randomize the positions
       int y = floor(random( height));
-      clues[i] = new Item(x, y, 20, 20, color(#5AF3F7)); //create the items
+      clues[i] = new Item(x, y, 30, 30, color(#5AF3F7)); //create the items
     }
   }
 

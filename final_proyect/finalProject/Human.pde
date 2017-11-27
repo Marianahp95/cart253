@@ -4,7 +4,7 @@ class Human{
 
 // The number of pixels the avatar moves per frame
 // Default is zero (it's not moving)
-float speed = 1;
+float speed = 5;
 // The number of radians the avatar turns per frame
 // Default is zero (it's not turning)
 float turnSpeed = 0;
@@ -62,13 +62,14 @@ int currentFrame;
     // Rotate by theta
     rotate(theta);
     // Draw an ellipse for the body)
-    imageMode(CENTER);
-   image(human_Sp[currentFrame],0,0,size,size);
-    // Draw a line so we can see which way it's facing)
-    line(0, 0, 25, 0);
+    pushStyle();
+      imageMode(CENTER);
+     image(human_Sp[currentFrame],0,0,size,size);
+     popStyle();
     // If you pushMatrix() you gotta popMatrix()
   popMatrix();
   
+  //edge wrapping 
    if (x > width){
     x = 0;
    }
@@ -84,14 +85,6 @@ int currentFrame;
    if (y < 0){
     y = height;
    }
-    
-    //draw the ellipse
-    
-    
-    ////makes the values used in noise() change over time
-    //tx += 0.006;
-    //ty += 0.006;
-    
    
   }
   
