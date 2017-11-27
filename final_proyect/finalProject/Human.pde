@@ -11,8 +11,15 @@ int size = 35;
 float x;
 float y;
   
+PImage[] human_Sp = new PImage[4];
+
+int rate = 5;
+int currentFrame;
+  
   Human() {
-    
+    for ( int i = 0; i< human_Sp.length; i++ ) { //load the door images into an array to animate it
+        human_Sp[i] = loadImage( "sprite_door" + i + ".png" );   
+      }
   }
   
   void display(){
@@ -23,12 +30,19 @@ float y;
     x = width * noise(tx);
     y = height * noise(ty);
     
+      if (frameCount % rate == 0) { 
+      // Change the frame (loop if we reach the end of the array)
+      currentFrame = (currentFrame+1) % human_Sp.length;
+    }
+    
     //draw the ellipse
-    ellipse(x,y,size,size);
+    image(human_Sp[currentFrame],x,y,size,size);
     
     //makes the values used in noise() change over time
     tx += 0.006;
     ty += 0.006;
+    
+   
   }
   
   

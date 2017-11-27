@@ -61,7 +61,7 @@ class Level_1 {
  
      grave = loadImage("data/Grave.png");
      fondo = loadImage("fondoMarvis.png");
-     for ( int i = 0; i< door_Sp.length; i++ ) {
+     for ( int i = 0; i< door_Sp.length; i++ ) { //load the door images into an array to animate it
         door_Sp[i] = loadImage( "sprite_door" + i + ".png" );   
       }
     
@@ -91,7 +91,7 @@ class Level_1 {
 
   void update() {//calls the update, draw and collide functions
 
-   background(fondo);
+   background(fondo);//background with an image
    
     //webcam
     handleVideoInput();
@@ -113,23 +113,24 @@ class Level_1 {
       marvis.drawAvatar();
      
 
-      for (int i = 0; i < tombs.length; i++) {
+      for (int i = 0; i < tombs.length; i++) { //Draw the tombs
         tombs[i].drawObstacle();
       }
 
-      for (int i = 0; i < clues.length; i++) {
+      for (int i = 0; i < clues.length; i++) { //Draw the clues
         clues[i].drawItem();
       }
 
       text(lives + " " + clueId, 100, 100); //temporary lives display 
 
+      //door animation
       // Check if this frame is one where we should update the animation
     if (frameCount % rate == 0) {
       // Change the frame (loop if we reach the end of the array)
       currentFrame = (currentFrame+1) % door_Sp.length;
     }
 
-      if (clueId == 3) {
+      if (clueId == 3) { //if the player has collected all 3 clues the door opens
         doorOpen = true;
         pushStyle();
           fill(#98F75A);
@@ -289,7 +290,7 @@ class Level_1 {
     }
   }
 
-  void doorCheck() {
+  void doorCheck() { //CHecks if the ghost has reached the door
     if ( (marvis.x + marvis.mSize/2) > doorX && (marvis.x - marvis.mSize/2) < doorX +  doorSizeX && 
       (marvis.y + marvis.mSize/2) > doorY && (marvis.y - marvis.mSize/2) < doorY + doorSizeY && doorOpen == true) {
       won = true;
