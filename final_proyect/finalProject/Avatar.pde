@@ -17,12 +17,24 @@ class Avatar{
   
   int redness = 255; //variable that controls the redness of the avatar as it becomes more evil
   
-  PImage marvisSp;
+   PImage[] marvisSpA = new PImage[4];
+   int mS = 0;
+   
+   int rate;
+   
+   int currentFrame;
   
-  Avatar(int _x, int _y, PImage _marvisSp) {
+  Avatar(int _x, int _y, int tempRate) {
     x = _x;
     y = _y;
-    marvisSp = _marvisSp;
+    
+    
+    for ( int i = 0; i< marvisSpA.length; i++ ) {
+        marvisSpA[i] = loadImage( "sprite_Marvis" + i + ".png" );   
+      }
+      // Save the rate
+      rate = tempRate;
+      
   }
   
    void update() {
@@ -36,9 +48,17 @@ class Avatar{
     //contsrain the position so the avatar can't leave the screen 
     x = constrain(x, mSize/2, width - mSize/2);
     y = constrain(y, mSize/2, height - mSize/2);
+    
+    
    }
    
    void drawAvatar(){
+     
+       // Check if this frame is one where we should update the animation
+    if (frameCount % rate == 0) {
+      // Change the frame (loop if we reach the end of the array)
+      currentFrame = (currentFrame+1) % marvisSpA.length;
+    }
      
     pushMatrix();
       // Translate to the location (so we rotate the avatar around its centre)
@@ -48,12 +68,8 @@ class Avatar{
       
       //Color of the avatar
       pushStyle(); 
-        fill(255,redness,redness);
-        // Draw an ellipse for the body)
-        image(marvisSp,-25,-22,51,43);
-        //ellipse(0, 0, mSize, mSize);
-        // Draw a line so we can see which way it's facing)
-        //line(0, 0, 25, 0);
+        tint(255,redness,redness);
+        image(marvisSpA[currentFrame],-25,-22,51,43);
       popStyle();
     popMatrix();
     

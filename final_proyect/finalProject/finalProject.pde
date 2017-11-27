@@ -53,8 +53,6 @@ void setup() {
   // Set the size
   size(1080, 720);
   
- 
-
     // Start up the webcam
     video = new Capture(this, 640, 480, 30);
     video.start();
