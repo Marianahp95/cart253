@@ -27,6 +27,9 @@ class Title {
      for ( int i = 0; i< MarvisFront_Sp.length; i++ ) { //load the door images into an array to animate it
         MarvisFront_Sp[i] = loadImage( "sprite_MarvisFront" + i + ".png" );   
       }
+     for ( int i = 0; i< ClueBig.length; i++ ) { //load the door images into an array to animate it
+       ClueBig[i] = loadImage( "sprite_clueBig" + i + ".png" );   
+      }
   }
 
   void update() {
@@ -42,10 +45,12 @@ class Title {
   // Displays the title of the game and the basic instructions to press any key
   void display() {
     background(0);
-    tint(255, fadeInTitle); 
-    image(titleScreen,0,0);
-    image(MarvisFront_Sp[currentFrame],0,170,540,540);
-    
+    pushStyle();
+      tint(255, fadeInTitle); 
+      image(titleScreen,0,0);
+      image(MarvisFront_Sp[currentFrame],0,170,540,540);
+      image(ClueBig[currentFrame],560,350,300,300);
+    popStyle();
     fadeInTitle ++;//fades in the title
   }
   

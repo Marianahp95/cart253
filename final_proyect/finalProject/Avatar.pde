@@ -68,7 +68,7 @@ class Avatar{
       
       //Color of the avatar
       pushStyle(); 
-        tint(255,redness,redness);
+        tint(255,redness,redness, 150);
         image(marvisSpA[currentFrame],-25,-22,51,43);
       popStyle();
     popMatrix();

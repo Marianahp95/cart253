@@ -51,6 +51,8 @@ class Level_1 {
 
   PImage grave;
   PImage[] door_Sp = new PImage[4];
+  PImage[] heart = new PImage[5];
+  
   
    int rate = 5;
    int currentFrame;
@@ -63,6 +65,10 @@ class Level_1 {
      fondo = loadImage("fondoMarvis.png");
      for ( int i = 0; i< door_Sp.length; i++ ) { //load the door images into an array to animate it
         door_Sp[i] = loadImage( "sprite_door" + i + ".png" );   
+      }
+      
+     for ( int i = 0; i< heart.length; i++ ) { //load the door images into an array to animate it
+        heart[i] = loadImage( "sprite_Heart" + i + ".png" );   
       }
     
     //we create the avatar 
@@ -104,6 +110,10 @@ class Level_1 {
 
     if (!paused) { //if the game isn't paused by the clues run everything normally
 
+      for (int i = 0; i < tombs.length; i++) { //Draw the tombs
+        tombs[i].drawObstacle();
+      }
+      
       marvis.update();
       checkObstColl();
       checkHumanColl();
@@ -112,10 +122,6 @@ class Level_1 {
       doorCheck();
       marvis.drawAvatar();
      
-
-      for (int i = 0; i < tombs.length; i++) { //Draw the tombs
-        tombs[i].drawObstacle();
-      }
 
       for (int i = 0; i < clues.length; i++) { //Draw the clues
         clues[i].drawItem();
@@ -187,9 +193,11 @@ class Level_1 {
     
     if (extraLifeOn){
      pushStyle();
-      fill(random(floor(255)), random(floor(255)), random(floor(255)));
-      ellipse(brightestPixel.x, brightestPixel.y, 20, 20);
+      //fill(random(floor(255)), random(floor(255)), random(floor(255)));
+      //ellipse(brightestPixel.x, brightestPixel.y, 20, 20);
+      image(heart[currentFrame], brightestPixel.x, brightestPixel.y, 30,30);
      popStyle();
+      //marvis.redness = marvis.redness + 100;//color changing 
     }
    
   }
@@ -215,6 +223,9 @@ class Level_1 {
       marvis.redness = marvis.redness - 100;//color changing 
       looseLife();
     }
+    
+    
+    
   }
 
   void collectItem() {
@@ -235,7 +246,7 @@ class Level_1 {
         (marvis.y + marvis.mSize/2) > brightestPixel.y - 10 && (marvis.y - marvis.mSize/2) < brightestPixel.y + 10 && extraLifeOn)  {
           extraLifeOn = false;
           lives = lives +1;
-          
+          marvis.redness = marvis.redness + 100;
      }
   }
 
