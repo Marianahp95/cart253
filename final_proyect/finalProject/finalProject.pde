@@ -5,9 +5,6 @@ import processing.video.*;
 
 //*******TO DO LIST*******
 
-//- COLLISION OF HUMAN WITH OBSTACLES
-
-
 //- ADD SOUNDS
 //- ADD GRAPHICS
 //- MAKE GRAPHICS
@@ -24,8 +21,8 @@ enum State {
     TITLE, 
     INTRO, 
     LEVEL_1, 
-    //LEVEL_2,
-    //LEVEL_3
+    LEVEL_2,
+    LEVEL_3,
     GAMEOVER,
     GAMEWON
 }
@@ -36,8 +33,8 @@ State state;
 Title title;
 Intro intro;
 Level_1 level_1;
-//Level_2 level_2;
-//Level_3 level_3;
+Level_2 level_2;
+Level_3 level_3;
 GameOver gameover;
 GameWon gamewon;
 // The capture object for reading from the webcam
@@ -56,8 +53,8 @@ void setup() {
   title = new Title();
   intro = new Intro();
   level_1 = new Level_1();
-  //level_2 = new Level_2();
-  //level_3 = new Level_3();
+  level_2 = new Level_2();
+  level_3 = new Level_3();
   gameover = new GameOver();
   gamewon = new GameWon();
 
@@ -93,7 +90,7 @@ void draw() {
   case LEVEL_1:
     level_1.update();
     if (level_1.won){
-      state = State.GAMEWON;
+      state = State.LEVEL_2;
     }
     
     if (level_1.finished) {
@@ -105,6 +102,36 @@ void draw() {
     
     break;
     //ADD HERE FUTURE LEVELS
+    
+    case LEVEL_2:
+    level_2.update();
+    if (level_2.won){
+      state = State.LEVEL_3;
+    }
+    
+    if (level_2.finished) {
+      state = State.GAMEOVER;
+      //state = State.LEVEL_2;
+      //level_1.reset();
+    }
+    
+    
+    break;
+    
+    case LEVEL_3:
+    level_3.update();
+    if (level_3.won){
+      state = State.GAMEWON;
+    }
+    
+    if (level_3.finished) {
+      state = State.GAMEOVER;
+      //state = State.LEVEL_2;
+      //level_1.reset();
+    }
+    
+    
+    break;
     
      case GAMEWON:
     gamewon.update();
@@ -150,6 +177,14 @@ void keyPressed() {
     level_1.keyPressed();
     break;
     
+  case LEVEL_2:
+    level_2.keyPressed();
+    break;
+    
+  case LEVEL_3:
+    level_3.keyPressed();
+    break;
+    
   case GAMEOVER:
     gameover.keyPressed();
     break;
@@ -176,6 +211,14 @@ void keyReleased() {
 
   case LEVEL_1:
     level_1.keyReleased();
+    break;
+    
+  case LEVEL_2:
+    level_2.keyReleased();
+    break;
+    
+  case LEVEL_3:
+    level_3.keyReleased();
     break;
 
   case GAMEOVER:

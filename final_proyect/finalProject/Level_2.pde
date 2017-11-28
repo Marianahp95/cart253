@@ -1,6 +1,6 @@
 
 
-class Level_1 {
+class Level_2 {
 
   Avatar marvis; //declare the object variables
   Human human_1;
@@ -58,7 +58,7 @@ class Level_1 {
    int currentFrame;
   
 
-  Level_1() {
+  Level_2() {
  //LOAD ALL IMAGES
  
      grave = loadImage("data/Grave.png");
@@ -104,7 +104,7 @@ class Level_1 {
     pushStyle();
       tint(0, 153, 204, 50);
       imageMode(CENTER);
-      image(video, width/2, height/2);
+      //image(video, width/2, height/2);
     popStyle();  
       brightestPixelDisplay();
 

@@ -1,6 +1,6 @@
 
 
-class Level_1 {
+class Level_3 {
 
   Avatar marvis; //declare the object variables
   Human human_1;
@@ -58,7 +58,7 @@ class Level_1 {
    int currentFrame;
   
 
-  Level_1() {
+  Level_3() {
  //LOAD ALL IMAGES
  
      grave = loadImage("data/Grave.png");
