@@ -90,9 +90,11 @@ class Level_2 {
       clues[i] = new Item(x, y, 30, 30, color(#5AF3F7)); //create the items
     }
 
-    for (int i = 0; i < human.length; i++) {//for loop draws the obstacles 
-      human[i] = new Human(); //create the obstacles
+    for (int i = 0; i < human.length; i++) {//for loop draws the human 
+      human[i] = new Human(floor(random(width)), floor(random(height)), .05); //create the humans
     }
+    
+    
   
   }
 

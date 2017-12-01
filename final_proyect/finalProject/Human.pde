@@ -27,10 +27,13 @@ PImage[] human_Sp = new PImage[4];
 int rate = 5;
 int currentFrame;
   
-  Human() {
+  Human(int _x, int _y, float _t) {
     for ( int i = 0; i< human_Sp.length; i++ ) { //load the door images into an array to animate it
         human_Sp[i] = loadImage( "sprite_human" + i + ".png" );   
       }
+      x = _x;
+      y = _y;
+      t = _t;
   }
   
   void display(){
@@ -49,7 +52,7 @@ int currentFrame;
     x += cos(theta) * speed;
     y += sin(theta) * speed;
   
-    t += 0.05;
+    t += random(0.05);
     
     if (frameCount % rate == 0) { 
       // Change the frame (loop if we reach the end of the array)

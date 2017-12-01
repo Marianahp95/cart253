@@ -91,7 +91,7 @@ class Level_1 {
     }
 
 
-    human_1 = new Human(); //create the human
+    human_1 = new Human(width/4,height/4,.03); //create the human
   
   }
 
@@ -104,7 +104,7 @@ class Level_1 {
     pushStyle();
       tint(0, 153, 204, 50);
       imageMode(CENTER);
-      image(video, width/2, height/2);
+      //image(video, width/2, height/2);
     popStyle();  
       brightestPixelDisplay();
 
@@ -209,7 +209,7 @@ class Level_1 {
         (marvis.y + marvis.mSize/2) > tombs[i].y && (marvis.y - marvis.mSize/2) < tombs[i].y + tombs[i].sizeY) {
 
         println("collide");
-        marvis.speed = 0; //stops when it hits the obstacles but can pass through them
+        marvis.speed = 1; //stops when it hits the obstacles but can pass through them
       }
     }
   }

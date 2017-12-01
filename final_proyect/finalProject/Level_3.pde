@@ -91,7 +91,7 @@ class Level_3 {
     }
 
 
-    human_1 = new Human(); //create the human
+    human_1 = new Human(100,200,.03); //create the human
   
   }
 
@@ -104,7 +104,7 @@ class Level_3 {
     pushStyle();
       tint(0, 153, 204, 50);
       imageMode(CENTER);
-      image(video, width/2, height/2);
+      //image(video, width/2, height/2);
     popStyle();  
       brightestPixelDisplay();
 
