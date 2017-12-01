@@ -96,7 +96,9 @@ void draw() {
     if (level_1.finished) {
       state = State.GAMEOVER;
       //state = State.LEVEL_2;
-      //level_1.reset();
+      level_1.reset();
+      level_2.reset();
+      level_3.reset();
     }
     
     
@@ -112,7 +114,9 @@ void draw() {
     if (level_2.finished) {
       state = State.GAMEOVER;
       //state = State.LEVEL_2;
-      //level_1.reset();
+      level_1.reset();
+       level_2.reset();
+      level_3.reset();
     }
     
     
@@ -127,7 +131,9 @@ void draw() {
     if (level_3.finished) {
       state = State.GAMEOVER;
       //state = State.LEVEL_2;
-      //level_1.reset();
+      level_1.reset();
+       level_2.reset();
+      level_3.reset();
     }
     
     
@@ -139,6 +145,8 @@ void draw() {
       state = State.TITLE;
       //state = State.LEVEL_2;
       level_1.reset();
+       level_2.reset();
+      level_3.reset();
       title.reset();
       gamewon.finished = false;
     }

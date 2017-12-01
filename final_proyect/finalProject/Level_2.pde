@@ -215,7 +215,7 @@ class Level_2 {
         (marvis.y + marvis.mSize/2) > tombs[i].y && (marvis.y - marvis.mSize/2) < tombs[i].y + tombs[i].sizeY) {
 
         println("collide");
-        marvis.speed = 0; //stops when it hits the obstacles but can pass through them
+        marvis.speed = 1; //stops when it hits the obstacles but can pass through them
       }
     }
   }
