@@ -3,10 +3,10 @@
 class Level_2 {
 
   Avatar marvis; //declare the object variables
-  Human human_1;
+  Human[] human = new Human[2];
 
   Obstacle[] tombs = new Obstacle[30];//create an array of obstacles
-  Item[] clues = new Item[3];//create an array of items
+  Item[] clues = new Item[5];//create an array of items
 
   // A variable to track whether the level is finished
   boolean finished = false;
@@ -90,8 +90,9 @@ class Level_2 {
       clues[i] = new Item(x, y, 30, 30, color(#5AF3F7)); //create the items
     }
 
-
-    human_1 = new Human(); //create the human
+    for (int i = 0; i < human.length; i++) {//for loop draws the obstacles 
+      human[i] = new Human(); //create the obstacles
+    }
   
   }
 
@@ -118,7 +119,10 @@ class Level_2 {
       checkObstColl();
       checkHumanColl();
       collectItem();
-      human_1.update();
+      
+      for (int i = 0; i < human.length; i++) { //Draw the tombs
+        human[i].update();
+      } 
       doorCheck();
       marvis.drawAvatar();
      
@@ -136,7 +140,7 @@ class Level_2 {
       currentFrame = (currentFrame+1) % door_Sp.length;
     }
 
-      if (clueId == 3) { //if the player has collected all 3 clues the door opens
+      if (clueId == 5) { //if the player has collected all 3 clues the door opens
         doorOpen = true;
         pushStyle();
           fill(#98F75A);
@@ -215,15 +219,16 @@ class Level_2 {
   }
 
   void checkHumanColl() {
-
-    if ( (marvis.x + marvis.mSize/2) > human_1.x && (marvis.x - marvis.mSize/2) < human_1.x + human_1.size && 
-      (marvis.y + marvis.mSize/2) > human_1.y && (marvis.y - marvis.mSize/2) < human_1.y + human_1.size && humanHit == false) {
+    
+  for (int i = 0; i < human.length; i++) {
+    if ( (marvis.x + marvis.mSize/2) > human[i].x && (marvis.x - marvis.mSize/2) < human[i].x + human[i].size && 
+      (marvis.y + marvis.mSize/2) > human[i].y && (marvis.y - marvis.mSize/2) < human[i].y + human[i].size && humanHit == false) {
       println("HE CAUGHT YOU");
       humanHit = true;
       marvis.redness = marvis.redness - 100;//color changing 
       looseLife();
-    }
-    
+    }  
+   }
   }
 
   void collectItem() {
@@ -266,6 +271,16 @@ class Level_2 {
     if (clueId == 3 ) {
       background(0);
       text("CLUE 3", width/2, height/2);
+    }
+    
+    if (clueId == 4 ) {
+      background(0);
+      text("CLUE 4", width/2, height/2);
+    }
+    
+    if (clueId == 5 ) {
+      background(0);
+      text("CLUE 5", width/2, height/2);
     }
     popStyle();
   }
