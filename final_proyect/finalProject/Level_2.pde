@@ -57,8 +57,13 @@ class Level_2 {
    int rate = 5;
    int currentFrame;
   
+   PFont font;
 
   Level_2() {
+    
+    //load font
+    font = createFont("ArcadeClassic.ttf", 700);
+    
  //LOAD ALL IMAGES
  
      grave = loadImage("data/Grave_2.png");
@@ -258,31 +263,32 @@ class Level_2 {
   void displayClues() {
 
     pushStyle();
+    textFont(font);
     fill(255, 0, 0);
     textSize(70);
     if (clueId == 1 ) {
       background(0);
-      text("CLUE 1", width/2, height/2);
+     text("Press  X  to  continue", width/2 , height/2 + height/4);
     }
 
     if (clueId == 2 ) {
       background(0);
-      text("CLUE 2", width/2, height/2);
+      text("Press  X  to  continue", width/2 , height/2 + height/4);
     }
 
     if (clueId == 3 ) {
       background(0);
-      text("CLUE 3", width/2, height/2);
+      text("Press  X  to  continue", width/2 , height/2 + height/4);
     }
     
     if (clueId == 4 ) {
       background(0);
-      text("CLUE 4", width/2, height/2);
+     text("Press  X  to  continue", width/2 , height/2 + height/4);
     }
     
     if (clueId == 5 ) {
       background(0);
-      text("CLUE 5", width/2, height/2);
+      text("Press  X  to  continue", width/2 , height/2 + height/4);
     }
     popStyle();
   }

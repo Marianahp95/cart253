@@ -53,14 +53,19 @@ class Level_1 {
   PImage[] door_Sp = new PImage[4];
   PImage[] heart = new PImage[5];
   
+  PFont font;
+  
   
    int rate = 5;
    int currentFrame;
   
 
   Level_1() {
- //LOAD ALL IMAGES
+    
+    //load font
+    font = createFont("ArcadeClassic.ttf", 700);
  
+    //LOAD ALL IMAGES
      grave = loadImage("data/Grave.png");
      fondo = loadImage("fondoMarvis.png");
      for ( int i = 0; i< door_Sp.length; i++ ) { //load the door images into an array to animate it
@@ -248,24 +253,25 @@ class Level_1 {
      }
   }
 
-  void displayClues() {
+  void displayClues() { // text inside the clues
 
     pushStyle();
+    textFont(font);
     fill(255, 0, 0);
-    textSize(70);
+    textSize(50);
     if (clueId == 1 ) {
       background(0);
-      text("CLUE 1", width/2, height/2);
+      text("Press  X  to  continue", width/2 , height/2 + height/4);
     }
 
     if (clueId == 2 ) {
       background(0);
-      text("CLUE 2", width/2, height/2);
+      text("Press  X  to  continue", width/2 , height/2 + height/4);
     }
 
     if (clueId == 3 ) {
       background(0);
-      text("CLUE 3", width/2, height/2);
+     text("Press  X  to  continue", width/2 , height/2 + height/4);
     }
     popStyle();
   }
