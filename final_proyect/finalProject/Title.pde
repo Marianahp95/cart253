@@ -21,7 +21,7 @@ class Title {
   int rate = 10;
   int currentFrame;
 
-  // The constructor does nothing
+  
   Title() {
     titleScreen = loadImage("TitleScreen.png");
      for ( int i = 0; i< MarvisFront_Sp.length; i++ ) { //load the door images into an array to animate it

@@ -10,7 +10,6 @@ import processing.video.*;
 //- MAKE GRAPHICS
 
   //- Instructions
-  //- Title screen 
   //- Game over screen
   //- Game Won screen 
   
