@@ -6,7 +6,7 @@ class GameWon {
   
   PImage gamewonImg;
 
-PImage[] MarvisGood_Sp = new PImage[2];
+PImage[] MarvisGood_Sp = new PImage[4];
 
 int fadeInTitle;
 int rate = 10;
@@ -30,7 +30,7 @@ int currentFrame;
   }
 
   void display() { //display the GAME OVER screen 
-    background(0);
+    background(gamewonImg);
     textAlign(CENTER, CENTER);
     textSize(64);
     fill(255);
@@ -41,7 +41,7 @@ int currentFrame;
     pushStyle();
       tint(255, fadeInTitle); 
       imageMode(CENTER);
-      image(MarvisGood_Sp[currentFrame],width/2,height/2,880,682);
+      image(MarvisGood_Sp[currentFrame],width/4,270, 620,620);
      
     popStyle();
     fadeInTitle ++;//fades in the title

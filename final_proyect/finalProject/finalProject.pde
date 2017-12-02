@@ -6,13 +6,6 @@ import processing.video.*;
 //*******TO DO LIST*******
 
 //- ADD SOUNDS
-//- ADD GRAPHICS
-//- MAKE GRAPHICS
-
-  //- Instructions
-  //- Game over screen
-  //- Game Won screen 
-  
 
 //I'm using enum to track the state the program is in.
 enum State {
@@ -82,6 +75,7 @@ void draw() {
     intro.update();
     if (intro.finished) {
       state = State.LEVEL_1;
+      //state = State.GAMEWON;
     }
     break;
 

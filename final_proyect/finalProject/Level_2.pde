@@ -61,8 +61,8 @@ class Level_2 {
   Level_2() {
  //LOAD ALL IMAGES
  
-     grave = loadImage("data/Grave.png");
-     fondo = loadImage("fondoMarvis.png");
+     grave = loadImage("data/Grave_2.png");
+     fondo = loadImage("fondoMarvis_2.png");
      for ( int i = 0; i< door_Sp.length; i++ ) { //load the door images into an array to animate it
         door_Sp[i] = loadImage( "sprite_door" + i + ".png" );   
       }

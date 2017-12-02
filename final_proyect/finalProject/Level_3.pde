@@ -20,7 +20,7 @@ class Level_3 {
   int startY = height/2;
 
   //number of starting lives
-  int lives = 3;
+  int lives = 7;
 
   //clue index
   int clueId;
@@ -61,8 +61,8 @@ class Level_3 {
   Level_3() {
  //LOAD ALL IMAGES
  
-     grave = loadImage("data/Grave.png");
-     fondo = loadImage("fondoMarvis.png");
+     grave = loadImage("data/Grave_3.png");
+     fondo = loadImage("fondoMarvis_3.png");
      for ( int i = 0; i< door_Sp.length; i++ ) { //load the door images into an array to animate it
         door_Sp[i] = loadImage( "sprite_door" + i + ".png" );   
       }
