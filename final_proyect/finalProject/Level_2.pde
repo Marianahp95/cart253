@@ -90,8 +90,8 @@ class Level_2 {
     }
 
     for (int i = 0; i < clues.length; i++) {//for loop draws the items 
-      int x = floor(random( width)); //randomize the positions
-      int y = floor(random( height));
+      int x = floor(random( width - 20)); //randomize the positions
+      int y = floor(random( height - 20));
       clues[i] = new Item(x, y, 30, 30, color(#5AF3F7)); //create the items
     }
 

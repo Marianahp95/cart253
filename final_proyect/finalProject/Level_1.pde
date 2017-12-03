@@ -53,6 +53,8 @@ class Level_1 {
   PImage[] door_Sp = new PImage[4];
   PImage[] heart = new PImage[5];
   
+  PImage [] clue_sp = new PImage[3];
+  
   PFont font;
   
   
@@ -72,8 +74,12 @@ class Level_1 {
         door_Sp[i] = loadImage( "sprite_door" + i + ".png" );   
       }
       
-     for ( int i = 0; i< heart.length; i++ ) { //load the door images into an array to animate it
+     for ( int i = 0; i< heart.length; i++ ) { //load the heart images into an array to animate it
         heart[i] = loadImage( "sprite_Heart" + i + ".png" );   
+      }
+      
+      for ( int i = 0; i< clue_sp.length; i++ ) { //load the clue images into an array 
+        clue_sp[i] = loadImage( "sprite_clue_Sp" + i + ".png" );   
       }
     
     //we create the avatar 
@@ -90,8 +96,8 @@ class Level_1 {
     }
 
     for (int i = 0; i < clues.length; i++) {//for loop draws the items 
-      int x = floor(random( width)); //randomize the positions
-      int y = floor(random( height));
+      int x = floor(random( width-20)); //randomize the positions
+      int y = floor(random( height-20));
       clues[i] = new Item(x, y, 30, 30, color(#5AF3F7)); //create the items
     }
 
@@ -256,23 +262,28 @@ class Level_1 {
   void displayClues() { // text inside the clues
 
     pushStyle();
-    textFont(font);
-    fill(255, 0, 0);
-    textSize(50);
-    if (clueId == 1 ) {
-      background(0);
-      text("Press  X  to  continue", width/2 , height/2 + height/4);
-    }
-
-    if (clueId == 2 ) {
-      background(0);
-      text("Press  X  to  continue", width/2 , height/2 + height/4);
-    }
-
-    if (clueId == 3 ) {
-      background(0);
-     text("Press  X  to  continue", width/2 , height/2 + height/4);
-    }
+      textFont(font);
+      fill(255, 0, 0);
+      textSize(25);
+      imageMode(CENTER);
+      
+      if (clueId == 1 ) {
+        background(0);
+       image(clue_sp[clueId-1],width/2, height/2.5);
+        text("Press  X  to  continue", width/2 , height-30);
+      }
+  
+      if (clueId == 2 ) {
+        background(0);
+        image(clue_sp[clueId-1],width/2, height/2.5);
+        text("Press  X  to  continue", width/2 , height/2 + height/4);
+      }
+  
+      if (clueId == 3 ) {
+        background(0);
+        image(clue_sp[clueId-1],width/2, height/2.5);
+       text("Press  X  to  continue", width/2 , height/2 + height/4);
+      }
     popStyle();
   }
 
