@@ -232,6 +232,7 @@ class Level_1 {
       println("HE CAUGHT YOU");
       humanHit = true;
       marvis.redness = marvis.redness - 100;//color changing 
+      
       looseLife();
     }
     
@@ -246,6 +247,7 @@ class Level_1 {
         println("PICKUP");
         clues[i].pickUp();
         clueId ++;
+        
         paused = true;
       }
     }
@@ -256,6 +258,7 @@ class Level_1 {
           extraLifeOn = false;
           lives = lives +1;
           marvis.redness = marvis.redness + 100;
+          extraLife.play();
      }
   }
 
@@ -267,6 +270,7 @@ class Level_1 {
       imageMode(CENTER);
       
       if (clueId == 1 ) {
+        collectOrb_sound.play();
         String s = "That house looks very familiar, maybe I used to live there...";
         background(0);
        image(clue_sp[clueId-1],width/2, height/2.5);
@@ -279,6 +283,7 @@ class Level_1 {
       }
   
       if (clueId == 2 ) {
+        collectOrb_sound.play();
         String s = "That's my mother's necklace! I'm sure of it";
         background(0);
         image(clue_sp[clueId-1],width/2, height/2.5);
@@ -291,6 +296,7 @@ class Level_1 {
       }
   
       if (clueId == 3 ) {
+        collectOrb_sound.play();
         background(0);
          String s = "My old toy boat! I used to love the sea...";
         image(clue_sp[clueId-1],width/2, height/2.5);
@@ -327,6 +333,7 @@ class Level_1 {
   void looseLife() { 
     if (lives > 0 ) {//checks if there are still lifes left and removes one
       lives = lives - 1;
+      looseLife.play();
     }
     if (lives == 0) { //No lives = game over
       finished = true;

@@ -238,6 +238,7 @@ class Level_3 {
       println("HE CAUGHT YOU");
       humanHit = true;
       marvis.redness = marvis.redness - 100;//color changing 
+      
       looseLife();
     }  
    }
@@ -252,6 +253,7 @@ class Level_3 {
         println("PICKUP");
         clues[i].pickUp();
         clueId ++;
+        collectOrb_sound.play();
         paused = true;
       }
     }
@@ -274,6 +276,7 @@ class Level_3 {
     imageMode(CENTER);
     
     if (clueId == 1 ) {
+      collectOrb_sound.play();
       String s = "My dad’s fishing rod! He had promised to take me fishing…";
         background(0);
        image(clue_sp[clueId-1],width/2, height/2.5);
@@ -286,30 +289,33 @@ class Level_3 {
     }
 
     if (clueId == 2 ) {
+      collectOrb_sound.play();
        String s = "Now I know what happened, I slipped on the dock and fell into the cold water…";
         background(0);
        image(clue_sp[clueId-1],width/2, height/2.5);
        fill(255);
        textSize(35);
-       text(s, 80 , height-150, 920,80);
+       text(s, 80 , height-130, 920,80);
         fill(255, 0, 0);
         textSize(25);
         text("Press  X  to  continue", width/2 , height-30);
     }
 
     if (clueId == 3 ) {
+      collectOrb_sound.play();
        String s = "I was waiting there for my father, who would never arrive…";
         background(0);
        image(clue_sp[clueId-1],width/2, height/2.5);
        fill(255);
        textSize(35);
-       text(s, 80 , height-150, 920,80);
+       text(s, 80 , height-130, 920,80);
         fill(255, 0, 0);
         textSize(25);
         text("Press  X  to  continue", width/2 , height-30);
     }
     
     if (clueId == 4 ) {
+      collectOrb_sound.play();
       String s = "My mom was holding this when they pulled my body out of the water… ";
         background(0);
        image(clue_sp[clueId-1],width/2, height/2.5);
@@ -347,7 +353,9 @@ class Level_3 {
   void looseLife() { 
     if (lives > 0 ) {//checks if there are still lifes left and removes one
       lives = lives - 1;
+      looseLife.play();
     }
+    
     if (lives == 0) { //No lives = game over
       finished = true;
     }

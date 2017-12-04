@@ -1,4 +1,18 @@
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
+
 import processing.video.*;
+
+Minim minim;
+
+AudioPlayer musica; //class that lets us play audio
+AudioPlayer collectOrb_sound; 
+AudioPlayer extraLife ;
+AudioPlayer looseLife;
 
 //Ghost Stories
 //by Mariana Hernández
@@ -37,6 +51,14 @@ void setup() {
   // Set the size
   size(1080, 720);
   
+  minim = new Minim(this); //new minim object
+  
+  musica = minim.loadFile("data/Darkness.mp3", 1024);//load the background music
+  collectOrb_sound = minim.loadFile("data/CollectOrb.mp3", 1024);//load the collectorb sound
+  extraLife = minim.loadFile("data/ExtraLife.mp3", 1024);//load the extra life sound
+  looseLife = minim.loadFile("data/LooseLife.mp3", 1024);
+  musica.loop();//loop that file 
+  
     // Start up the webcam
     video = new Capture(this, 640, 480, 30);
     video.start();
@@ -51,8 +73,8 @@ void setup() {
   gamewon = new GameWon();
 
   // We start our state in the title screen
-  //state = State.TITLE;
-  state = State.LEVEL_3; ///FOR DEBUGGING
+  state = State.TITLE;
+  //state = State.LEVEL_3; ///FOR DEBUGGING
   
 }
 

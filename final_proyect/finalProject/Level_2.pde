@@ -238,6 +238,7 @@ class Level_2 {
       println("HE CAUGHT YOU");
       humanHit = true;
       marvis.redness = marvis.redness - 100;//color changing 
+      looseLife.play();
       looseLife();
     }  
    }
@@ -252,6 +253,7 @@ class Level_2 {
         println("PICKUP");
         clues[i].pickUp();
         clueId ++;
+        collectOrb_sound.play();
         paused = true;
       }
     }
@@ -274,6 +276,7 @@ class Level_2 {
     imageMode(CENTER);
     
     if (clueId == 1 ) {
+      collectOrb_sound.play();
      String s = "I think that’s my father’s… looks like he was a solider.";
         background(0);
        image(clue_sp[clueId-1],width/2, height/2.5);
@@ -286,6 +289,7 @@ class Level_2 {
     }
 
     if (clueId == 2 ) {
+      collectOrb_sound.play();
       String s = "My mother left these flowers by my grave, they’re still fresh…";
         background(0);
        image(clue_sp[clueId-1],width/2, height/2.5);
@@ -298,6 +302,7 @@ class Level_2 {
     }
 
     if (clueId == 3 ) {
+      collectOrb_sound.play();
       String s = "My kite! I used to play with this everyday.";
         background(0);
        image(clue_sp[clueId-1],width/2, height/2.5);
@@ -310,6 +315,7 @@ class Level_2 {
     }
     
     if (clueId == 4 ) {
+      collectOrb_sound.play();
      String s = "His dog tag… I remember now, we received this after he died.";
         background(0);
        image(clue_sp[clueId-1],width/2, height/2.5);
@@ -348,6 +354,7 @@ class Level_2 {
   void looseLife() { 
     if (lives > 0 ) {//checks if there are still lifes left and removes one
       lives = lives - 1;
+      looseLife.play();
     }
     if (lives == 0) { //No lives = game over
       finished = true;
