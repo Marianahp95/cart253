@@ -15,11 +15,8 @@ AudioPlayer extraLife ;
 AudioPlayer looseLife;
 
 //Ghost Stories
-//by Mariana Hernández
-
-//*******TO DO LIST*******
-
-//- ADD SOUNDS
+//code and graphics by Mariana Hernández
+//story insipred by Karen Rangel's "Ghost Stories"
 
 //I'm using enum to track the state the program is in.
 enum State {
