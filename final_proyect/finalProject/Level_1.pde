@@ -65,7 +65,7 @@ class Level_1 {
   Level_1() {
     
     //load font
-    font = createFont("ArcadeClassic.ttf", 700);
+    font = createFont("8bitOperatorPlus8-Regular.ttf", 700);
  
     //LOAD ALL IMAGES
      grave = loadImage("data/Grave.png");
@@ -263,26 +263,43 @@ class Level_1 {
 
     pushStyle();
       textFont(font);
-      fill(255, 0, 0);
-      textSize(25);
+     
       imageMode(CENTER);
       
       if (clueId == 1 ) {
+        String s = "That house looks very familiar, maybe I used to live there...";
         background(0);
        image(clue_sp[clueId-1],width/2, height/2.5);
+       fill(255);
+       textSize(35);
+       text(s, 80 , height-150, 920,80);
+        fill(255, 0, 0);
+        textSize(25);
         text("Press  X  to  continue", width/2 , height-30);
       }
   
       if (clueId == 2 ) {
+        String s = "That's my mother's necklace! I'm sure of it";
         background(0);
         image(clue_sp[clueId-1],width/2, height/2.5);
-        text("Press  X  to  continue", width/2 , height/2 + height/4);
+        fill(255);
+       textSize(35);
+       text(s, 80 , height-150, 920,80);
+         fill(255, 0, 0);
+         textSize(25);
+        text("Press  X  to  continue", width/2 , height-30);
       }
   
       if (clueId == 3 ) {
         background(0);
+         String s = "My old toy boat! I used to love the sea...";
         image(clue_sp[clueId-1],width/2, height/2.5);
-       text("Press  X  to  continue", width/2 , height/2 + height/4);
+        fill(255);
+       textSize(35);
+       text(s, 80 , height-150, 920,80);
+         fill(255, 0, 0);
+         textSize(25);
+       text("Press  X  to  continue", width/2 , height-30);
       }
     popStyle();
   }

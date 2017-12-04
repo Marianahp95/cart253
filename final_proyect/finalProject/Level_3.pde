@@ -6,7 +6,7 @@ class Level_3 {
   Human[] human = new Human[3];
 
   Obstacle[] tombs = new Obstacle[30];//create an array of obstacles
-  Item[] clues = new Item[5];//create an array of items
+  Item[] clues = new Item[4];//create an array of items
 
   // A variable to track whether the level is finished
   boolean finished = false;
@@ -53,6 +53,7 @@ class Level_3 {
   PImage[] door_Sp = new PImage[4];
   PImage[] heart = new PImage[5];
   
+  PImage [] clue_sp = new PImage[4];
   
    int rate = 5;
    int currentFrame;
@@ -62,7 +63,7 @@ class Level_3 {
   Level_3() {
     
     //load font
-    font = createFont("ArcadeClassic.ttf", 700);
+    font = createFont("8bitOperatorPlus8-Regular.ttf", 700);
     
  //LOAD ALL IMAGES
  
@@ -74,6 +75,10 @@ class Level_3 {
       
      for ( int i = 0; i< heart.length; i++ ) { //load the door images into an array to animate it
         heart[i] = loadImage( "sprite_Heart" + i + ".png" );   
+      }
+      
+      for ( int i = 0; i< clue_sp.length; i++ ) { //load the clue images into an array 
+        clue_sp[i] = loadImage( "sprite_clue_Sp_3" + i + ".png" );   
       }
     
     //we create the avatar 
@@ -147,7 +152,7 @@ class Level_3 {
       currentFrame = (currentFrame+1) % door_Sp.length;
     }
 
-      if (clueId == 5) { //if the player has collected all 3 clues the door opens
+      if (clueId == 4) { //if the player has collected all 4 clues the door opens
         doorOpen = true;
         pushStyle();
           fill(#98F75A);
@@ -255,7 +260,7 @@ class Level_3 {
     if ( (marvis.x + marvis.mSize/2) > brightestPixel.x - 10 && (marvis.x - marvis.mSize/2) < brightestPixel.x + 10 && 
         (marvis.y + marvis.mSize/2) > brightestPixel.y - 10 && (marvis.y - marvis.mSize/2) < brightestPixel.y + 10 && extraLifeOn)  {
           extraLifeOn = false;
-          lives = lives +1;
+          lives = lives +2;
           marvis.redness = marvis.redness + 100;
      }
   }
@@ -266,31 +271,56 @@ class Level_3 {
     textFont(font);
     fill(255, 0, 0);
     textSize(70);
+    imageMode(CENTER);
+    
     if (clueId == 1 ) {
-      background(0);
-     text("Press  X  to  continue", width/2 , height/2 + height/4);
-     text("Press  X  to  continue", width/2 , height/2 + height/4);
+      String s = "My dad’s fishing rod! He had promised to take me fishing…";
+        background(0);
+       image(clue_sp[clueId-1],width/2, height/2.5);
+       fill(255);
+       textSize(35);
+       text(s, 80 , height-150, 920,80);
+        fill(255, 0, 0);
+        textSize(25);
+        text("Press  X  to  continue", width/2 , height-30);
     }
 
     if (clueId == 2 ) {
-      background(0);
-       text("Press  X  to  continue", width/2 , height/2 + height/4);
+       String s = "Now I know what happened, I slipped on the dock and fell into the cold water…";
+        background(0);
+       image(clue_sp[clueId-1],width/2, height/2.5);
+       fill(255);
+       textSize(35);
+       text(s, 80 , height-150, 920,80);
+        fill(255, 0, 0);
+        textSize(25);
+        text("Press  X  to  continue", width/2 , height-30);
     }
 
     if (clueId == 3 ) {
-      background(0);
-      text("Press  X  to  continue", width/2 , height/2 + height/4);
+       String s = "I was waiting there for my father, who would never arrive…";
+        background(0);
+       image(clue_sp[clueId-1],width/2, height/2.5);
+       fill(255);
+       textSize(35);
+       text(s, 80 , height-150, 920,80);
+        fill(255, 0, 0);
+        textSize(25);
+        text("Press  X  to  continue", width/2 , height-30);
     }
     
     if (clueId == 4 ) {
-      background(0);
-       text("Press  X  to  continue", width/2 , height/2 + height/4);
+      String s = "My mom was holding this when they pulled my body out of the water… ";
+        background(0);
+       image(clue_sp[clueId-1],width/2, height/2.5);
+       fill(255);
+       textSize(35);
+       text(s, 80 , height-150, 920,80);
+        fill(255, 0, 0);
+        textSize(25);
+        text("Press  X  to  continue", width/2 , height-30);
     }
     
-    if (clueId == 5 ) {
-      background(0);
-       text("Press  X  to  continue", width/2 , height/2 + height/4);
-    }
     popStyle();
   }
 

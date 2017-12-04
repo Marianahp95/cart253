@@ -51,7 +51,8 @@ void setup() {
   gamewon = new GameWon();
 
   // We start our state in the title screen
-  state = State.TITLE;
+  //state = State.TITLE;
+  state = State.LEVEL_3; ///FOR DEBUGGING
   
 }
 

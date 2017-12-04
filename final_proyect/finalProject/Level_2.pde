@@ -6,7 +6,7 @@ class Level_2 {
   Human[] human = new Human[2];
 
   Obstacle[] tombs = new Obstacle[30];//create an array of obstacles
-  Item[] clues = new Item[5];//create an array of items
+  Item[] clues = new Item[4];//create an array of items
 
   // A variable to track whether the level is finished
   boolean finished = false;
@@ -53,6 +53,7 @@ class Level_2 {
   PImage[] door_Sp = new PImage[4];
   PImage[] heart = new PImage[5];
   
+  PImage [] clue_sp = new PImage[4];
   
    int rate = 5;
    int currentFrame;
@@ -62,7 +63,7 @@ class Level_2 {
   Level_2() {
     
     //load font
-    font = createFont("ArcadeClassic.ttf", 700);
+    font = createFont("8bitOperatorPlus8-Regular.ttf", 700);
     
  //LOAD ALL IMAGES
  
@@ -74,6 +75,10 @@ class Level_2 {
       
      for ( int i = 0; i< heart.length; i++ ) { //load the door images into an array to animate it
         heart[i] = loadImage( "sprite_Heart" + i + ".png" );   
+      }
+      
+      for ( int i = 0; i< clue_sp.length; i++ ) { //load the clue images into an array 
+        clue_sp[i] = loadImage( "sprite_clues_Sp_2" + i + ".png" );   
       }
     
     //we create the avatar 
@@ -147,7 +152,7 @@ class Level_2 {
       currentFrame = (currentFrame+1) % door_Sp.length;
     }
 
-      if (clueId == 5) { //if the player has collected all 3 clues the door opens
+      if (clueId == 4) { //if the player has collected all 4 clues the door opens
         doorOpen = true;
         pushStyle();
           fill(#98F75A);
@@ -266,30 +271,57 @@ class Level_2 {
     textFont(font);
     fill(255, 0, 0);
     textSize(70);
+    imageMode(CENTER);
+    
     if (clueId == 1 ) {
-      background(0);
-     text("Press  X  to  continue", width/2 , height/2 + height/4);
+     String s = "I think that’s my father’s… looks like he was a solider.";
+        background(0);
+       image(clue_sp[clueId-1],width/2, height/2.5);
+       fill(255);
+       textSize(35);
+       text(s, 80 , height-150, 920,80);
+        fill(255, 0, 0);
+        textSize(25);
+        text("Press  X  to  continue", width/2 , height-30);
     }
 
     if (clueId == 2 ) {
-      background(0);
-      text("Press  X  to  continue", width/2 , height/2 + height/4);
+      String s = "My mother left these flowers by my grave, they’re still fresh…";
+        background(0);
+       image(clue_sp[clueId-1],width/2, height/2.5);
+       fill(255);
+       textSize(35);
+       text(s, 80 , height-150, 920,80);
+        fill(255, 0, 0);
+        textSize(25);
+        text("Press  X  to  continue", width/2 , height-30);
     }
 
     if (clueId == 3 ) {
-      background(0);
-      text("Press  X  to  continue", width/2 , height/2 + height/4);
+      String s = "My kite! I used to play with this everyday.";
+        background(0);
+       image(clue_sp[clueId-1],width/2, height/2.5);
+       fill(255);
+       textSize(35);
+       text(s, 80 , height-150, 920,80);
+        fill(255, 0, 0);
+        textSize(25);
+        text("Press  X  to  continue", width/2 , height-30);
     }
     
     if (clueId == 4 ) {
-      background(0);
-     text("Press  X  to  continue", width/2 , height/2 + height/4);
+     String s = "His dog tag… I remember now, we received this after he died.";
+        background(0);
+       image(clue_sp[clueId-1],width/2, height/2.5);
+       fill(255);
+       textSize(35);
+       text(s, 80 , height-150, 920,80);
+        fill(255, 0, 0);
+        textSize(25);
+        text("Press  X  to  continue", width/2 , height-30);
     }
     
-    if (clueId == 5 ) {
-      background(0);
-      text("Press  X  to  continue", width/2 , height/2 + height/4);
-    }
+    
     popStyle();
   }
 
