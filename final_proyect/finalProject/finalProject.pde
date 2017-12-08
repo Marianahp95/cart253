@@ -1,3 +1,25 @@
+///////////-------------GHOST STORIES-------------/////////
+//code and graphics by Mariana Hernández
+//story insipred by Karen Rangel's "Ghost Stories"
+
+/* -----------------ARTIST'S STATEMENT-------------
+
+I believe that with this project I managed to tell an interesting 
+story while applying all of the concepts and techniques we learned 
+in class effectively. I think I solved the AI of the enemies in a very 
+creative way using the noise function mixed with the rotation movement 
+that I also implemented for the ghost. I believe that I really pulled off a 
+cohesive graphic style that gave the game a lot more solidity and I
+added a lot of details (such as the transparency of the ghosts and 
+all of the small animations) that brought the game to life. Another
+feature that I’m proud of is the ghost’s collision with the graves, 
+I believe it gives it that feeling of passing through them and 
+not just completely ignoring them. I like the way I integrated the 
+webcam as an extra feature and I feel like I managed to 
+make the game challenging but not impossible. Most importantly 
+I consider the gameplay to be very engaging and fun.
+
+*/
 import ddf.minim.*;
 import ddf.minim.analysis.*;
 import ddf.minim.effects.*;
@@ -13,10 +35,6 @@ AudioPlayer musica; //class that lets us play audio
 AudioPlayer collectOrb_sound; 
 AudioPlayer extraLife ;
 AudioPlayer looseLife;
-
-//Ghost Stories
-//code and graphics by Mariana Hernández
-//story insipred by Karen Rangel's "Ghost Stories"
 
 //I'm using enum to track the state the program is in.
 enum State {
